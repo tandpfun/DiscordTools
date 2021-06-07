@@ -50,7 +50,7 @@
                   ($nuxt.$route.name === 'guildcount' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
                   ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
                 "
-                >GuildCount</span
+                >Guild Count</span
               >
             </NuxtLink>
           </div>
@@ -107,7 +107,7 @@
                     role="menuitem"
                     tabindex="-1"
                     id="menu-item-0"
-                    >GuildCount</span
+                    >Guild Count</span
                   ></NuxtLink
                 >
               </div>
@@ -146,7 +146,7 @@
                     ($nuxt.$route.name === 'guildcount' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
                     ' flex items-center font-medium text-base leading-snug text-white relative transition'
                   "
-                  >GuildCount</span
+                  >Guild Count</span
                 >
               </NuxtLink>
             </div>
