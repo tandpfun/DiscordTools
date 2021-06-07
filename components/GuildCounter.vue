@@ -3,7 +3,7 @@
     <div class="align-center mx-5 text-center">
       <div class="sm:my-auto max-w-2xl mx-auto my-10">
         <h1 class="md:text-5xl mb-2 text-3xl font-bold text-gray-900">
-          <span class="text-discord-blurple block">GuildCount</span>
+          <span class="text-discord-blurple block">Guild Count</span>
         </h1>
         <p class="sm:text-xl text-md text-gray-200">Below are some statistics on the guilds your account is in.</p>
       </div>
