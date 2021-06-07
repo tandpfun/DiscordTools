@@ -5,10 +5,12 @@ const app = require('express')()
 
 // Require routes
 const oauth = require('./routes/oauth')
+const status = require('./routes/status')
 const chalk = require('chalk')
 
 // Import routes
 app.use(oauth)
+app.use(status)
 
 // Export express app
 module.exports = app

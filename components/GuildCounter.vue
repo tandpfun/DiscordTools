@@ -11,16 +11,10 @@
         <div class="text-3xl font-bold text-center text-white" v-if="loading">
           <svg class="animate-spin w-8 h-8 mx-auto" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
         </div>
-        <div class="text-3xl font-bold text-center text-gray-400" v-else-if="fetchError">
-          <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> Error Fetching Guilds
-        </div>
+        <div class="text-3xl font-bold text-center text-gray-400" v-else-if="fetchError"><font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> Error Fetching Guilds</div>
         <div v-else>
           <h1 class="mb-1 text-3xl font-bold text-center text-gray-900">
             <span class="block text-white"
@@ -98,11 +92,7 @@
             </div>
           </div>
           <div class="sm:mt-8 sm:flex justify-center mt-5 text-center">
-            <a
-              :class="showList ? 'bg-discord-red' : 'bg-discord-blurple'"
-              class="cursor-pointer transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-2 px-5 rounded-md transition duration-250"
-              @click="toggleList"
-            >
+            <a :class="showList ? 'bg-discord-red' : 'bg-discord-blurple'" class="cursor-pointer transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-2 px-5 rounded-md transition duration-250" @click="toggleList">
               {{ showList ? 'Hide List' : 'Show List' }}
             </a>
           </div>
@@ -178,7 +168,10 @@ export default {
           if (process.client) {
             console.log('FETCH ERROR')
             if (err.response?.status === 401) return (document.location.href = '/login')
-            else return (this.fetchError = true)
+            else {
+              this.loading = false
+              this.fetchError = true
+            }
           }
         })
     },

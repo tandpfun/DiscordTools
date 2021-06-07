@@ -1,33 +1,11 @@
 <template>
-  <nav
-    class="navbar-expand-lg lg:bg-dark-darker relative flex flex-wrap items-center justify-between px-2 py-5 mb-3 transition duration-500"
-    :class="showMenu ? ' bg-dark-darkest' : ''"
-  >
-    <div class="max-w-7xl container px-4 mx-auto flex flex-wrap items-center justify-between mobilenav">
+  <nav class="navbar-expand-lg lg:bg-dark-darker relative flex flex-wrap items-center justify-between px-2 py-5 mb-3 transition duration-500" :class="showMenu ? ' bg-dark-darkest' : ''">
+    <div class="max-w-7xl mobilenav container flex flex-wrap items-center justify-between px-4 mx-auto">
       <div class="lg:w-auto lg:static lg:block lg:justify-start relative flex justify-between w-full">
         <NuxtLink to="/"
-          ><span class="flex items-center px-3 py-2 text-5xl font-bold leading-snug text-white"
-            ><font-awesome-icon class="h-11 px-2 logo-icon" :icon="['fas', 'wrench']" /></span
+          ><span class="flex items-center px-3 py-2 text-5xl font-bold leading-snug text-white"><font-awesome-icon class="h-11 logo-icon px-2" :icon="['fas', 'wrench']" /></span
         ></NuxtLink>
-        <button
-          class="
-            lg:hidden
-            focus:outline-none
-            block
-            px-3
-            py-1
-            text-xl
-            leading-none
-            text-white
-            bg-transparent
-            border border-transparent border-solid
-            rounded
-            outline-none
-            cursor-pointer
-          "
-          type="button"
-          v-on:click="toggleNavbar()"
-        >
+        <button class="lg:hidden focus:outline-none block px-3 py-1 text-xl leading-none text-white bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer" type="button" v-on:click="toggleNavbar()">
           <font-awesome-icon :icon="['fas', 'bars']" />
         </button>
       </div>
@@ -35,91 +13,54 @@
         <div class="flex flex-row">
           <div class="nav-item px-2 py-2 ml-2">
             <NuxtLink to="/">
-              <span
-                v-bind:class="
-                  ($nuxt.$route.name === 'index' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                  ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
-                "
+              <span v-bind:class="($nuxt.$route.name === 'index' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'"
                 >Home</span
               >
             </NuxtLink>
           </div>
           <div class="nav-item px-2 py-2 ml-2">
             <NuxtLink to="/guildcount">
-              <span
-                v-bind:class="
-                  ($nuxt.$route.name === 'guildcount' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                  ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
-                "
+              <span v-bind:class="($nuxt.$route.name === 'guildcount' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'"
                 >GuildCount</span
               >
             </NuxtLink>
           </div>
-          <div class="nav-item px-2 py-2 ml-2">
+          <!--<div class="nav-item px-2 py-2 ml-2">
             <NuxtLink to="/permissions">
-              <span
-                v-bind:class="
-                  ($nuxt.$route.name === 'permissions' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                  ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
-                "
+              <span v-bind:class="($nuxt.$route.name === 'permissions' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'"
                 >Permissions</span
               >
             </NuxtLink>
-          </div>
+          </div>-->
           <div class="nav-item px-2 py-2 ml-2">
             <NuxtLink to="/status">
-              <span
-                v-bind:class="
-                  ($nuxt.$route.name === 'status' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                  ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
-                "
+              <span v-bind:class="($nuxt.$route.name === 'status' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'"
                 >Status</span
               >
             </NuxtLink>
           </div>
-          <div class="nav-item px-2 py-2 ml-2">
+          <!--<div class="nav-item px-2 py-2 ml-2">
             <NuxtLink to="/datamine">
-              <span
-                v-bind:class="
-                  ($nuxt.$route.name === 'datamine' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                  ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
-                "
+              <span v-bind:class="($nuxt.$route.name === 'datamine' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'"
                 >Datamine</span
               >
             </NuxtLink>
-          </div>
+          </div>-->
         </div>
         <div v-if="!loggedIn" class="nav-item ml-auto">
           <a href="/login">
-            <div class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-xl text-white font-bold py-3 px-7 rounded-md transition duration-250">
-              Log In
-            </div>
+            <div class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-xl text-white font-bold py-3 px-7 rounded-md transition duration-250">Log In</div>
           </a>
         </div>
         <div v-else class="nav-item relative inline-block ml-auto" ref="dropdown">
-          <a
-            class="hover:opacity-80 px-7 duration-250 font-semibold text-white transition transform rounded opacity-100 cursor-pointer"
-            @click="toggleDropdown"
-          >
+          <a class="hover:opacity-80 px-7 duration-250 font-semibold text-white transition transform rounded opacity-100 cursor-pointer" @click="toggleDropdown">
             {{ user.username }}#{{ user.discriminator }}
             <font-awesome-icon class="ml-1" :icon="['fas', 'chevron-down']" />
           </a>
           <transition name="menu-fade">
             <div
               v-if="showDropdown"
-              class="
-                bg-dark-darkest
-                ring-1 ring-white ring-opacity-5
-                focus:outline-none
-                absolute
-                right-0
-                w-56
-                mt-2
-                origin-top-right
-                divide-y divide-gray-700
-                rounded-md
-                shadow-lg
-              "
+              class="bg-dark-darkest ring-1 ring-white ring-opacity-5 focus:outline-none absolute right-0 w-56 mt-2 origin-top-right divide-y divide-gray-700 rounded-md shadow-lg"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
@@ -127,25 +68,11 @@
             >
               <div class="py-1" role="none">
                 <NuxtLink to="/guildcount"
-                  ><span
-                    @click="toggleDropdown"
-                    class="hover:bg-dark-darker hover:text-gray-100 duration-250 block px-4 py-2 text-sm text-gray-200 transition"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-0"
-                    >GuildCount</span
-                  ></NuxtLink
+                  ><span @click="toggleDropdown" class="hover:bg-dark-darker hover:text-gray-100 duration-250 block px-4 py-2 text-sm text-gray-200 transition" role="menuitem" tabindex="-1" id="menu-item-0">GuildCount</span></NuxtLink
                 >
               </div>
               <div class="py-1" role="none">
-                <a
-                  href="/logout"
-                  class="hover:bg-dark-darker hover:text-red-500 duration-250 block px-4 py-2 text-sm font-semibold text-red-400 transition"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="menu-item-6"
-                  >Log Out</a
-                >
+                <a href="/logout" class="hover:bg-dark-darker hover:text-red-500 duration-250 block px-4 py-2 text-sm font-semibold text-red-400 transition" role="menuitem" tabindex="-1" id="menu-item-6">Log Out</a>
               </div>
             </div>
           </transition>
@@ -154,69 +81,41 @@
       <transition name="height">
         <div v-if="showMenu" class="navbar-expanded lg:hidden flex items-center block w-full overflow-hidden" ref="mobileNav">
           <div class="flex flex-col">
-            <div class="nav-item ml-2 px-2 py-2">
+            <div class="nav-item px-2 py-2 ml-2">
               <NuxtLink to="/">
-                <span
-                  v-bind:class="
-                    ($nuxt.$route.name === 'index' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                    ' flex items-center font-medium text-base leading-snug text-white relative transition'
-                  "
-                  >Home</span
-                >
+                <span v-bind:class="($nuxt.$route.name === 'index' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition'">Home</span>
               </NuxtLink>
             </div>
             <div class="nav-item px-2 py-2 ml-2">
               <NuxtLink to="/guildcount">
-                <span
-                  v-bind:class="
-                    ($nuxt.$route.name === 'guildcount' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                    ' flex items-center font-medium text-base leading-snug text-white relative transition'
-                  "
+                <span v-bind:class="($nuxt.$route.name === 'guildcount' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition'"
                   >GuildCount</span
                 >
               </NuxtLink>
             </div>
-            <div class="nav-item px-2 py-2 ml-2">
+            <!--<div class="nav-item px-2 py-2 ml-2">
               <NuxtLink to="/permissions">
-                <span
-                  v-bind:class="
-                    ($nuxt.$route.name === 'permissions' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                    ' flex items-center font-medium text-base leading-snug text-white relative transition'
-                  "
+                <span v-bind:class="($nuxt.$route.name === 'permissions' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition'"
                   >Permissions</span
                 >
               </NuxtLink>
-            </div>
+            </div>-->
             <div class="nav-item px-2 py-2 ml-2">
               <NuxtLink to="/status">
-                <span
-                  v-bind:class="
-                    ($nuxt.$route.name === 'status' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                    ' flex items-center font-medium text-base leading-snug text-white relative transition'
-                  "
-                  >Status</span
-                >
+                <span v-bind:class="($nuxt.$route.name === 'status' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition'">Status</span>
               </NuxtLink>
             </div>
-            <div class="nav-item px-2 py-2 ml-2">
+            <!--<div class="nav-item px-2 py-2 ml-2">
               <NuxtLink to="/datamine">
-                <span
-                  v-bind:class="
-                    ($nuxt.$route.name === 'datamine' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
-                    ' flex items-center font-medium text-base leading-snug text-white relative transition'
-                  "
+                <span v-bind:class="($nuxt.$route.name === 'datamine' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition'"
                   >Datamine</span
                 >
               </NuxtLink>
-            </div>
+            </div>-->
           </div>
           <div v-if="!loggedIn" class="nav-item ml-auto">
             <a href="/login">
-              <div
-                class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-xl text-white font-bold py-3 px-7 rounded-md transition duration-250"
-              >
-                Log In
-              </div>
+              <div class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-xl text-white font-bold py-3 px-7 rounded-md transition duration-250">Log In</div>
             </a>
           </div>
           <div v-else class="nav-item relative inline-block ml-auto" ref="mobiledropdown">
@@ -227,19 +126,7 @@
             <transition name="menu-fade">
               <div
                 v-if="showMobileDropdown"
-                class="
-                  bg-dark-darkest
-                  ring-1 ring-white ring-opacity-5
-                  focus:outline-none
-                  absolute
-                  right-0
-                  w-48
-                  mt-2
-                  origin-top-right
-                  divide-y divide-gray-700
-                  rounded-md
-                  shadow-lg
-                "
+                class="bg-dark-darkest ring-1 ring-white ring-opacity-5 focus:outline-none absolute right-0 w-48 mt-2 origin-top-right divide-y divide-gray-700 rounded-md shadow-lg"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="menu-button"
@@ -247,23 +134,9 @@
               >
                 <div class="py-1" role="none">
                   <NuxtLink to="/dash"
-                    ><span
-                      @click="toggleMobileDropdown"
-                      class="hover:bg-dark-darker hover:text-gray-100 duration-250 block px-4 py-2 text-sm text-gray-200 transition"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="menu-item-0"
-                      >Dashboard</span
-                    ></NuxtLink
+                    ><span @click="toggleMobileDropdown" class="hover:bg-dark-darker hover:text-gray-100 duration-250 block px-4 py-2 text-sm text-gray-200 transition" role="menuitem" tabindex="-1" id="menu-item-0">Dashboard</span></NuxtLink
                   >
-                  <a
-                    href="/logout"
-                    class="hover:bg-dark-darker hover:text-red-500 duration-250 block px-4 py-2 text-sm font-semibold text-red-400 transition"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-6"
-                    >Log Out</a
-                  >
+                  <a href="/logout" class="hover:bg-dark-darker hover:text-red-500 duration-250 block px-4 py-2 text-sm font-semibold text-red-400 transition" role="menuitem" tabindex="-1" id="menu-item-6">Log Out</a>
                 </div>
               </div>
             </transition>
