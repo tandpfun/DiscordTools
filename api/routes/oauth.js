@@ -91,7 +91,7 @@ router.get(
   '/callback',
   passport.authenticate('discord', { failureRedirect: '/' }),
   /* We authenticate the user, if user canceled we redirect them to index. */ (req, res) => {
-    // If user had set a returning url, we redirect them there, otherwise we redirect him to index.
+    // If user had set a returning url, we redirect them there, otherwise we redirect them to index.
     const url = req.session.backURL
     if (url) {
       req.session.backURL = null
