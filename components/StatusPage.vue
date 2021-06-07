@@ -25,8 +25,8 @@
           </h1>
           <h1 class="mb-1 text-3xl font-bold text-center text-gray-900">
             <span class="block text-white"
-              >Discord Staging is <span :class="status.discord.open ? 'text-discord-green' : 'text-discord-red'">{{ status.discord.open ? 'Open' : 'Closed' }}</span> with an API ping of
-              <span class="text-discord-blurple">{{ status.staging.ping }}ms</span></span
+              >Discord Staging is <span :class="status.discord.open ? 'text-discord-green' : 'text-discord-red'">{{ status.discord.open ? 'Open' : 'Closed' }}</span> with an API
+              ping of <span class="text-discord-blurple">{{ status.staging.ping }}ms</span></span
             >
           </h1>
         </div>

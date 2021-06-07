@@ -7,7 +7,17 @@ export default {
     htmlAttrs: {
       lang: 'en',
     },
-    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: '' }],
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: 'Useful tools for Discord power users.' },
+      { hid: 'keywords', name: 'keywords', content: 'discord, server count, server counter, server, counter, discord tools, tools, tool' },
+      { hid: 'og:description', name: 'og:description', content: 'Useful tools for Discord power users.' },
+      { hid: 'og:title', name: 'og:title', content: 'DiscordTools' },
+      { hid: 'og:locale', name: 'og:locale', content: 'en_US' },
+      { hid: 'og:image', name: 'og:image', content: '/logo.png' },
+      { hid: 'theme-color', name: 'theme-color', content: '#5865F2' },
+    ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 

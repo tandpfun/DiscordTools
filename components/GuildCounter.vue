@@ -92,17 +92,21 @@
             </div>
           </div>
           <div class="sm:mt-8 sm:flex justify-center mt-5 text-center">
-            <a :class="showList ? 'bg-discord-red' : 'bg-discord-blurple'" class="cursor-pointer transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-2 px-5 rounded-md transition duration-250" @click="toggleList">
+            <a
+              :class="showList ? 'bg-discord-red' : 'bg-discord-blurple'"
+              class="cursor-pointer transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-2 px-5 rounded-md transition duration-250"
+              @click="toggleList"
+            >
               {{ showList ? 'Hide List' : 'Show List' }}
             </a>
           </div>
           <transition name="height">
             <div v-if="showList" class="bg-dark-darker rounded-xl max-w-xl p-5 mx-auto mt-5 text-center">
               <div v-for="guild in guilds" :key="guild.id" class="flex items-center justify-center overflow-hidden text-center text-white">
-                <img v-if="guild.owner" src="~/assets/img/owner.png" class="inline w-4 h-4" />
-                <img v-if="guild.permissions & (1 << 13) && !guild.owner" src="~/assets/img/moderator.svg" class="inline w-4 h-4" />
-                <img v-if="guild.features.includes('PARTNERED')" src="~/assets/img/partner.png" class="inline w-4 h-4" />
-                <img v-if="guild.features.includes('VERIFIED')" src="~/assets/img/verified.png" class="inline w-4 h-4" />
+                <img v-if="guild.owner" src="~/assets/img/owner.png" class="inline w-4 h-4 ml-1" />
+                <img v-if="guild.permissions & (1 << 13) && !guild.owner" src="~/assets/img/moderator.svg" class="inline w-4 h-4 ml-1" />
+                <img v-if="guild.features.includes('PARTNERED')" src="~/assets/img/partner.png" class="inline w-4 h-4 ml-1" />
+                <img v-if="guild.features.includes('VERIFIED')" src="~/assets/img/verified.png" class="inline w-4 h-4 ml-1" />
                 <span class="ml-1">{{ guild.name }}</span>
               </div>
             </div>
