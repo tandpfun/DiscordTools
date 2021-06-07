@@ -6,12 +6,24 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "core-js": "^3.9.1",
-    "nuxt": "^2.15.3"
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "express-session": "^1.17.2",
+    "memorystore": "^1.6.6",
+    "nuxt": "^2.15.3",
+    "nuxt-tailvue": "^1.0.90",
+    "passport": "^0.4.1",
+    "passport-discord": "^0.1.4",
+    "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
@@ -23,6 +35,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "postcss": "^8.3.0",
     "prettier": "^2.2.1",
+    "prettier-plugin-tailwind-css": "^1.5.0",
     "tailwindcss": "^2.1.4"
   }
 }
