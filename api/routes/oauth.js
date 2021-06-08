@@ -68,7 +68,7 @@ const fetchLimiter = rateLimit({
 })
 
 router.use('/api/users/@me', userLimiter)
-router.use('/api/users/@me', fetchLimiter)
+router.use('/api/fetch', fetchLimiter)
 
 let domain = process.env.BASE_URL
 
