@@ -61,7 +61,14 @@ const userLimiter = rateLimit({
   handler: ratelimitHandler,
 })
 
+const fetchLimiter = rateLimit({
+  windowMs: 30000, // 10 secs
+  max: 5,
+  handler: ratelimitHandler,
+})
+
 router.use('/api/users/@me', userLimiter)
+router.use('/api/users/@me', fetchLimiter)
 
 let domain = process.env.BASE_URL
 
@@ -78,7 +85,7 @@ router.get(
         req.session.backURL = parsed.path
       }
     } else {
-      req.session.backURL = '/guildcount'
+      req.session.backURL = '/'
     }
     // Forward the request to the passport middleware.
     next()
@@ -116,6 +123,67 @@ router.get('/api/users/@me', (req, res) => {
   let user = Object.assign({}, req.user)
   user.accessToken = '[Redacted]'
   res.send(user)
+})
+
+async function getGuild(id) {
+  let data;
+
+  await axios.get(`https://discord.com/api/v8/guilds/${id}/widget.json`).then(res => {
+    if (res.data?.id) data = {
+      type: 'guild',
+      guild: res.data
+    }
+  }).catch((err) => {
+    if (err.response?.data?.message === 'Widget Disabled') data = {
+      type: 'guild',
+      disabled: true,
+      guild: {}
+    }
+  })
+  if (data) {
+    let request = await axios
+    .get(`https://discord.com/api/v8/guilds/${id}/preview`, {
+      headers: {
+        Authorization: `Bot ${process.env.TOKEN}`,
+      },
+    })
+    .catch((err) => null)
+    if (request?.data) {
+      data.guild = Object.assign(request.data, data.guild)
+    }
+  }
+  return data
+}
+
+async function fetchUser(id) {
+  let request = await axios
+    .get('https://discord.com/api/v8/users/' + id, {
+      headers: {
+        Authorization: `Bot ${process.env.TOKEN}`,
+      },
+    })
+    .catch((err) => null)
+
+  if (request?.data) {
+    request.data.type = 'user'
+    return request.data
+  }
+  else return null
+}
+
+// Fetch Data Endpoint
+router.get('/api/fetch/:id', async (req, res) => {
+  if (!req.isAuthenticated()) return res.sendStatus(401)
+  let id = req.params.id
+  if (isNaN(id)) return res.sendStatus(400)
+
+  let guild = await getGuild(id)
+  if (guild) return res.send(guild)
+
+  let user = await fetchUser(id)
+  if (user) return res.send(user)
+
+  res.sendStatus(400)
 })
 
 // Guilds Endpoint

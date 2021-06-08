@@ -11,7 +11,11 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Useful tools for Discord power users.' },
-      { hid: 'keywords', name: 'keywords', content: 'discord, server count, server counter, server, counter, discord tools, tools, tool, snowflake, decoder, snowflake decoder, id, id decoder' },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content: 'discord, server count, server counter, server, counter, discord tools, tools, tool, snowflake, decoder, snowflake decoder, id, id decoder',
+      },
       { hid: 'og:description', name: 'og:description', content: 'Useful tools for Discord power users.' },
       { hid: 'og:title', name: 'og:title', content: 'DiscordTools' },
       { hid: 'og:locale', name: 'og:locale', content: 'en_US' },
