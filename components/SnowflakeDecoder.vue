@@ -50,7 +50,7 @@
                     <template v-if="data.type == 'user'">
                       <img
                         :src="
-                          data.avatar ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '.png?size=256' : 'https://cdn.discordapp.com/embed/avatars/0.png'
+                          data.avatar ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '?size=256' : 'https://cdn.discordapp.com/embed/avatars/0.png'
                         "
                         class="rounded-full m-1 mx-auto"
                         style="width: 75px; height: 75px"
@@ -66,7 +66,7 @@
                         v-if="!data.disabled && data.guild.icon"
                         :src="
                           data.guild.icon
-                            ? 'https://cdn.discordapp.com/icons/' + data.guild.id + '/' + data.guild.icon + '.png?size=256'
+                            ? 'https://cdn.discordapp.com/icons/' + data.guild.id + '/' + data.guild.icon + '?size=256'
                             : 'https://cdn.discordapp.com/embed/avatars/0.png'
                         "
                         class="rounded-full m-1 mx-auto"
