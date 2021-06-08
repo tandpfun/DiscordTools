@@ -55,6 +55,14 @@ let ratelimitHandler = function (req, res /*next*/) {
   }
 }
 
+const userLimiter = rateLimit({
+  windowMs: 10000, // 10 secs
+  max: 8,
+  handler: ratelimitHandler
+});
+
+router.use('/api/users/@me', userLimiter)
+
 let domain = process.env.BASE_URL
 
 // Login endpoint.
