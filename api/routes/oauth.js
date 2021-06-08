@@ -126,28 +126,33 @@ router.get('/api/users/@me', (req, res) => {
 })
 
 async function getGuild(id) {
-  let data;
+  let data
 
-  await axios.get(`https://discord.com/api/v8/guilds/${id}/widget.json`).then(res => {
-    if (res.data?.id) data = {
-      type: 'guild',
-      guild: res.data
-    }
-  }).catch((err) => {
-    if (err.response?.data?.message === 'Widget Disabled') data = {
-      type: 'guild',
-      disabled: true,
-      guild: {}
-    }
-  })
+  await axios
+    .get(`https://discord.com/api/v8/guilds/${id}/widget.json`)
+    .then((res) => {
+      if (res.data?.id)
+        data = {
+          type: 'guild',
+          guild: res.data,
+        }
+    })
+    .catch((err) => {
+      if (err.response?.data?.message === 'Widget Disabled')
+        data = {
+          type: 'guild',
+          disabled: true,
+          guild: {},
+        }
+    })
   if (data) {
     let request = await axios
-    .get(`https://discord.com/api/v8/guilds/${id}/preview`, {
-      headers: {
-        Authorization: `Bot ${process.env.TOKEN}`,
-      },
-    })
-    .catch((err) => null)
+      .get(`https://discord.com/api/v8/guilds/${id}/preview`, {
+        headers: {
+          Authorization: `Bot ${process.env.TOKEN}`,
+        },
+      })
+      .catch((err) => null)
     if (request?.data) {
       data.guild = Object.assign(request.data, data.guild)
     }
@@ -167,8 +172,7 @@ async function fetchUser(id) {
   if (request?.data) {
     request.data.type = 'user'
     return request.data
-  }
-  else return null
+  } else return null
 }
 
 // Fetch Data Endpoint

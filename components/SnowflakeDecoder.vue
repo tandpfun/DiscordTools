@@ -49,12 +49,12 @@
                   <div class="text-3xl text-center text-white mt-2 max-w-xl mx-auto" v-else-if="dataFetched">
                     <template v-if="data.type == 'user'">
                       <img
-                          :src="data.avatar ?
-                          'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '.png?size=256'
-                          : 'https://cdn.discordapp.com/embed/avatars/0.png'"
-                          class="rounded-full m-1 mx-auto"
-                          style="width: 75px; height: 75px;"
-                        />
+                        :src="
+                          data.avatar ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '.png?size=256' : 'https://cdn.discordapp.com/embed/avatars/0.png'
+                        "
+                        class="rounded-full m-1 mx-auto"
+                        style="width: 75px; height: 75px"
+                      />
                       <p class="text-xl text-gray-200 text-center"><b>Type:</b> {{ data.bot ? 'Bot' : 'User' }}</p>
                       <p class="text-xl text-gray-200 text-center"><b>Username:</b> {{ data.username }}#{{ data.discriminator }}</p>
                       <!-- <p class="text-xl text-gray-200 text-center"><b>Badges:</b> Coming Soon</p> -->
@@ -62,23 +62,35 @@
                       <p class="text-xl text-gray-200 text-center"><b>Bot:</b> {{ data.bot || 'false' }}</p>
                     </template>
                     <template v-else-if="data.type == 'guild'">
-                      <img v-if="!data.disabled && data.guild.icon"
-                          :src="data.guild.icon ?
-                          'https://cdn.discordapp.com/icons/' + data.guild.id + '/' + data.guild.icon + '.png?size=256'
-                          : 'https://cdn.discordapp.com/embed/avatars/0.png'"
-                          class="rounded-full m-1 mx-auto"
-                          style="width: 75px; height: 75px;"
-                        />
+                      <img
+                        v-if="!data.disabled && data.guild.icon"
+                        :src="
+                          data.guild.icon
+                            ? 'https://cdn.discordapp.com/icons/' + data.guild.id + '/' + data.guild.icon + '.png?size=256'
+                            : 'https://cdn.discordapp.com/embed/avatars/0.png'
+                        "
+                        class="rounded-full m-1 mx-auto"
+                        style="width: 75px; height: 75px"
+                      />
                       <p class="text-xl text-gray-200 text-center"><b>Type:</b> Server</p>
                       <div v-if="data.disabled">
                         <p class="text-xl text-gray-200 text-center">Widget is Disabled</p>
                       </div>
                       <div v-else class="text-center">
                         <p class="text-xl text-gray-200 text-center"><b>Name:</b> {{ data.guild.name }}</p>
-                        <p class="text-xl text-gray-200 text-center"><b>Members:</b> {{ data.guild.approximate_member_count ? addCommas(data.guild.approximate_member_count) : null || (data.guild.members.length == 100 ? 'More than 100' : data.guild.members.length) || 'Unknown' }}</p>
+                        <p class="text-xl text-gray-200 text-center">
+                          <b>Members:</b>
+                          {{
+                            data.guild.approximate_member_count
+                              ? addCommas(data.guild.approximate_member_count)
+                              : null || (data.guild.members.length == 100 ? 'More than 100' : data.guild.members.length) || 'Unknown'
+                          }}
+                        </p>
                         <p class="text-xl text-gray-200 text-center" v-if="data.guild.emojis ? data.guild.emojis.length : null"><b>Emojis:</b> {{ data.guild.emojis.length }}</p>
                         <p class="text-xl text-gray-200 text-center" v-if="data.guild.description"><b>Description:</b> {{ data.guild.description }}</p>
-                        <p class="text-xl text-gray-200 text-center" v-if="data.guild.instant_invite"><b>Invite:</b> <a class="text-blue-400" :href="data.guild.instant_invite">Click Here</a></p>
+                        <p class="text-xl text-gray-200 text-center" v-if="data.guild.instant_invite">
+                          <b>Invite:</b> <a class="text-blue-400" :href="data.guild.instant_invite">Click Here</a>
+                        </p>
                       </div>
                     </template>
                   </div>
@@ -196,23 +208,27 @@ export default {
       else return timestamp
     },
     parseURLParams(url) {
-        var queryStart = url.indexOf("?") + 1,
-            queryEnd   = url.indexOf("#") + 1 || url.length + 1,
-            query = url.slice(queryStart, queryEnd - 1),
-            pairs = query.replace(/\+/g, " ").split("&"),
-            parms = {}, i, n, v, nv;
+      var queryStart = url.indexOf('?') + 1,
+        queryEnd = url.indexOf('#') + 1 || url.length + 1,
+        query = url.slice(queryStart, queryEnd - 1),
+        pairs = query.replace(/\+/g, ' ').split('&'),
+        parms = {},
+        i,
+        n,
+        v,
+        nv
 
-        if (query === url || query === "") return;
+      if (query === url || query === '') return
 
-        for (i = 0; i < pairs.length; i++) {
-            nv = pairs[i].split("=", 2);
-            n = decodeURIComponent(nv[0]);
-            v = decodeURIComponent(nv[1]);
+      for (i = 0; i < pairs.length; i++) {
+        nv = pairs[i].split('=', 2)
+        n = decodeURIComponent(nv[0])
+        v = decodeURIComponent(nv[1])
 
-            if (!parms.hasOwnProperty(n)) parms[n] = [];
-            parms[n].push(nv.length === 2 ? v : null);
-        }
-        return parms;
+        if (!parms.hasOwnProperty(n)) parms[n] = []
+        parms[n].push(nv.length === 2 ? v : null)
+      }
+      return parms
     },
     fetchFromDiscord() {
       this.loading = true
@@ -277,7 +293,7 @@ export default {
       if (process.client) {
         let urlParams = this.parseURLParams(location.href)
         console.log(urlParams)
-        if (!urlParams) return;
+        if (!urlParams) return
         if (urlParams.s?.[0] && typeof urlParams.s?.[0] === 'string') {
           this.snowflake = urlParams.s[0]
           console.log(urlParams.s[0])

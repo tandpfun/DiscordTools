@@ -105,11 +105,9 @@
               <div v-for="guild in guilds.all" :key="guild.id" class="flex items-center justify-center overflow-hidden text-left text-white">
                 <div class="h-10 leading-10 w-full bg-light-lighter">
                   <img
-                    :src="guild.icon ?
-                    'https://cdn.discordapp.com/icons/' + guild.id + '/' + guild.icon + '.jpg?size=32'
-                    : 'https://cdn.discordapp.com/embed/avatars/0.png'"
+                    :src="guild.icon ? 'https://cdn.discordapp.com/icons/' + guild.id + '/' + guild.icon + '.jpg?size=32' : 'https://cdn.discordapp.com/embed/avatars/0.png'"
                     class="inline rounded-full float-left mt-1"
-                    style="width: 32px; height: 32px;"
+                    style="width: 32px; height: 32px"
                   />
                   <span class="ml-2">{{ guild.name }}</span>
                   <img v-if="guild.owner" src="~/assets/img/owner.png" class="inline w-4 h-4 ml-1" />
