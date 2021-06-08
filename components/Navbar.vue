@@ -54,13 +54,17 @@
               >
             </NuxtLink>
           </div>
-          <!--<div class="nav-item px-2 py-2 ml-2">
-            <NuxtLink to="/permissions">
-              <span v-bind:class="($nuxt.$route.name === 'permissions' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'"
-                >Permissions</span
+          <div class="nav-item px-2 py-2 ml-2">
+            <NuxtLink to="/snowflake">
+              <span
+                v-bind:class="
+                  ($nuxt.$route.name === 'snowflake' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
+                  ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
+                "
+                >Snowflake</span
               >
             </NuxtLink>
-          </div>-->
+          </div>
           <div class="nav-item px-2 py-2 ml-2">
             <NuxtLink to="/status">
               <span
@@ -150,13 +154,17 @@
                 >
               </NuxtLink>
             </div>
-            <!--<div class="nav-item px-2 py-2 ml-2">
-              <NuxtLink to="/permissions">
-                <span v-bind:class="($nuxt.$route.name === 'permissions' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition'"
-                  >Permissions</span
+            <div class="nav-item px-2 py-2 ml-2">
+              <NuxtLink to="/snowflake">
+                <span
+                  v-bind:class="
+                    ($nuxt.$route.name === 'snowflake' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
+                    ' flex items-center font-medium text-base leading-snug text-white relative transition'
+                  "
+                  >Snowflake</span
                 >
               </NuxtLink>
-            </div>-->
+            </div>
             <div class="nav-item px-2 py-2 ml-2">
               <NuxtLink to="/status">
                 <span
