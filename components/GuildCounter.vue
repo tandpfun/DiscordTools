@@ -19,7 +19,7 @@
           <h1 class="mb-1 text-3xl font-bold text-center text-gray-900">
             <span class="block text-white"
               >You are in
-              <span class="text-discord-blurple">{{ guilds.length }}</span>
+              <span class="text-discord-blurple">{{ guilds.all.length }}</span>
               Servers.</span
             >
           </h1>
@@ -27,65 +27,65 @@
             <span class="block text-white">Statistics</span>
           </h1>
           <div class="flex flex-wrap justify-center">
-            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded">
+            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded cursor-pointer" @click="showPopup('owned')">
               <div class="align-center box-border flex flex-auto px-5 py-2 ml-0 mr-0 text-center">
                 <div class="mx-auto">
                   <div class="text-discord-blurple text-sm font-bold uppercase">You Own</div>
                   <div class="text-3xl font-bold">
-                    {{ guilds.filter((g) => g.owner).length }}
+                    {{ guilds.owned.length }}
                   </div>
                 </div>
               </div>
             </div>
-            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded">
+            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded cursor-pointer" @click="showPopup('mod')">
               <div class="align-center box-border flex flex-auto px-5 py-2 ml-0 mr-0 text-center">
                 <div class="mx-auto">
                   <div class="text-discord-blurple text-sm font-bold uppercase">You Moderate</div>
                   <div class="text-3xl font-bold">
-                    {{ guilds.filter((g) => g.permissions & (1 << 13) && !g.owner).length }}
+                    {{ guilds.mod.length }}
                   </div>
                 </div>
               </div>
             </div>
-            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded">
+            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded cursor-pointer" @click="showPopup('community')">
               <div class="align-center box-border flex flex-auto px-5 py-2 ml-0 mr-0 text-center">
                 <div class="mx-auto">
                   <div class="text-discord-blurple text-sm font-bold uppercase">Community Enabled</div>
                   <div class="text-3xl font-bold">
-                    {{ guilds.filter((g) => g.features.includes('COMMUNITY')).length }}
+                    {{ guilds.community.length }}
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="flex flex-wrap justify-center">
-            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded">
+            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded cursor-pointer" @click="showPopup('verified')">
               <div class="align-center box-border flex flex-auto px-5 py-2 ml-0 mr-0 text-center">
                 <div class="mx-auto">
                   <div class="text-discord-blurple text-sm font-bold uppercase">Verified</div>
                   <div class="text-3xl font-bold">
-                    {{ guilds.filter((g) => g.features.includes('VERIFIED')).length }}
+                    {{ guilds.verified.length }}
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded">
+            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded cursor-pointer" @click="showPopup('partnered')">
               <div class="align-center box-border flex flex-auto px-5 py-2 ml-0 mr-0 text-center">
                 <div class="mx-auto">
                   <div class="text-discord-blurple text-sm font-bold uppercase">Partnered</div>
                   <div class="text-3xl font-bold">
-                    {{ guilds.filter((g) => g.features.includes('PARTNERED')).length }}
+                    {{ guilds.partnered.length }}
                   </div>
                 </div>
               </div>
             </div>
-            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded">
+            <div class="bg-dark-darker relative flex flex-col flex-wrap flex-1 mx-1 my-1 text-center text-white rounded cursor-pointer" @click="showPopup('discovery')">
               <div class="align-center box-border flex flex-auto px-5 py-2 ml-0 mr-0 text-center">
                 <div class="mx-auto">
                   <div class="text-discord-blurple text-sm font-bold uppercase">Discovery Enabled</div>
                   <div class="text-3xl font-bold">
-                    {{ guilds.filter((g) => g.features.includes('DISCOVERABLE')).length }}
+                    {{ guilds.discovery.length }}
                   </div>
                 </div>
               </div>
@@ -102,7 +102,7 @@
           </div>
           <transition name="height">
             <div v-if="showList" class="bg-dark-darker rounded-xl max-w-xl p-5 mx-auto mt-5 text-center">
-              <div v-for="guild in guilds" :key="guild.id" class="flex items-center justify-center overflow-hidden text-center text-white">
+              <div v-for="guild in guilds.all" :key="guild.id" class="flex items-center justify-center overflow-hidden text-center text-white">
                 <img v-if="guild.owner" src="~/assets/img/owner.png" class="inline w-4 h-4 ml-1" />
                 <img v-if="guild.permissions & (1 << 13) && !guild.owner" src="~/assets/img/moderator.svg" class="inline w-4 h-4 ml-1" />
                 <img v-if="guild.features.includes('PARTNERED')" src="~/assets/img/partner.png" class="inline w-4 h-4 ml-1" />
@@ -114,6 +114,79 @@
         </div>
       </div>
     </div>
+    <transition name="fade">
+      <div class="fixed z-10 inset-0 overflow-y-auto" v-if="popup.visible">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <!-- Background -->
+          <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div class="absolute inset-0 bg-gray-700 opacity-75"></div>
+          </div>
+
+          <!-- This element is to trick the browser into centering the modal contents. -->
+          <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+          <div
+            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-headline"
+          >
+            <div class="bg-dark-dark px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="sm:flex sm:items-start">
+                <div class="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
+                  <h3 class="text-lg leading-6 font-medium text-gray-100" id="modal-headline">
+                    <p v-if="popup.type === 'owned'">You Own</p>
+                    <p v-if="popup.type === 'mod'">You Moderate</p>
+                    <p v-if="popup.type === 'community'">Community Enabled</p>
+                    <p v-if="popup.type === 'verified'">Verified</p>
+                    <p v-if="popup.type === 'partnered'">Partnered</p>
+                    <p v-if="popup.type === 'discovery'">Discovery Enabled</p>
+                  </h3>
+                  <div class="mt-2">
+                    <div v-for="guild in guilds[popup.type]" :key="guild.id" class="flex items-center overflow-hidden text-white text-left">
+                      <img v-if="guild.owner" src="~/assets/img/owner.png" class="inline w-4 h-4 ml-1" />
+                      <img v-if="guild.permissions & (1 << 13) && !guild.owner" src="~/assets/img/moderator.svg" class="inline w-4 h-4 ml-1" />
+                      <img v-if="guild.features.includes('PARTNERED')" src="~/assets/img/partner.png" class="inline w-4 h-4 ml-1" />
+                      <img v-if="guild.features.includes('VERIFIED')" src="~/assets/img/verified.png" class="inline w-4 h-4 ml-1" />
+                      <span class="ml-1">{{ guild.name }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-dark-darker px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <button
+                type="button"
+                class="
+                  mt-3
+                  w-full
+                  inline-flex
+                  bg-discord-blurple
+                  justify-center
+                  rounded
+                  shadow-sm
+                  px-4
+                  py-2
+                  bg-white
+                  text-base
+                  font-medium
+                  text-white
+                  transform
+                  hover:-translate-y-0.5
+                  transition
+                  duration-250
+                  focus:ring-offset-2 focus:ring-indigo-500
+                  sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm
+                "
+                @click="popup.visible = false"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -128,6 +201,14 @@
 .height-enter, .height-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
   max-height: 0px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
 
@@ -156,6 +237,10 @@ export default {
       while (pattern.test(x)) x = x.replace(pattern, '$1,$2')
       return x
     },
+    showPopup(type) {
+      this.popup.visible = true
+      this.popup.type = type
+    },
     async fetchStats() {
       axios
         .get(process.env.baseUrl + '/api/users/@me/guilds')
@@ -163,7 +248,13 @@ export default {
           let data = req.data
           if (!data) return (this.fetchError = true)
 
-          this.guilds = data
+          this.guilds.all = data
+          this.guilds.owned = data.filter((g) => g.owner)
+          this.guilds.mod = data.filter((g) => g.permissions & (1 << 13) && !g.owner)
+          this.guilds.community = data.filter((g) => g.features.includes('COMMUNITY'))
+          this.guilds.partnered = data.filter((g) => g.features.includes('PARTNERED'))
+          this.guilds.verified = data.filter((g) => g.features.includes('VERIFIED'))
+          this.guilds.discovery = data.filter((g) => g.features.includes('DISCOVERABLE'))
           this.loading = false
           this.fetchError = false
         })
@@ -185,10 +276,23 @@ export default {
   },
   data() {
     return {
-      guilds: [],
+      guilds: {
+        all: [],
+        owned: [],
+        mod: [],
+        community: [],
+        verified: [],
+        partnered: [],
+        discovery: [],
+      },
       loading: true,
       fetchError: false,
       showList: false,
+      popup: {
+        visible: false,
+        title: '',
+        type: '',
+      },
     }
   },
   async created() {

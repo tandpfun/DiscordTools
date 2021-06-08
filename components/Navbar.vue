@@ -208,14 +208,14 @@
                 tabindex="-1"
               >
                 <div class="py-1" role="none">
-                  <NuxtLink to="/dash"
+                  <NuxtLink to="/guildcount"
                     ><span
                       @click="toggleMobileDropdown"
                       class="hover:bg-dark-darker hover:text-gray-100 duration-250 block px-4 py-2 text-sm text-gray-200 transition"
                       role="menuitem"
                       tabindex="-1"
                       id="menu-item-0"
-                      >Dashboard</span
+                      >Guild Count</span
                     ></NuxtLink
                   >
                   <a

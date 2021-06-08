@@ -58,8 +58,8 @@ let ratelimitHandler = function (req, res /*next*/) {
 const userLimiter = rateLimit({
   windowMs: 10000, // 10 secs
   max: 8,
-  handler: ratelimitHandler
-});
+  handler: ratelimitHandler,
+})
 
 router.use('/api/users/@me', userLimiter)
 
