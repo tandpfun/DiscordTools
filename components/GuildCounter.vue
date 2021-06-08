@@ -102,12 +102,21 @@
           </div>
           <transition name="height">
             <div v-if="showList" class="bg-dark-darker rounded-xl max-w-xl p-5 mx-auto mt-5 text-center">
-              <div v-for="guild in guilds.all" :key="guild.id" class="flex items-center justify-center overflow-hidden text-center text-white">
-                <img v-if="guild.owner" src="~/assets/img/owner.png" class="inline w-4 h-4 ml-1" />
-                <img v-if="guild.permissions & (1 << 13) && !guild.owner" src="~/assets/img/moderator.svg" class="inline w-4 h-4 ml-1" />
-                <img v-if="guild.features.includes('PARTNERED')" src="~/assets/img/partner.png" class="inline w-4 h-4 ml-1" />
-                <img v-if="guild.features.includes('VERIFIED')" src="~/assets/img/verified.png" class="inline w-4 h-4 ml-1" />
-                <span class="ml-1">{{ guild.name }}</span>
+              <div v-for="guild in guilds.all" :key="guild.id" class="flex items-center justify-center overflow-hidden text-left text-white">
+                <div class="h-10 leading-10 w-full bg-light-lighter">
+                  <img
+                    :src="guild.icon ?
+                    'https://cdn.discordapp.com/icons/' + guild.id + '/' + guild.icon + '.jpg?size=32'
+                    : 'https://cdn.discordapp.com/embed/avatars/0.png'"
+                    class="inline rounded-full float-left mt-1"
+                    style="width: 32px; height: 32px;"
+                  />
+                  <span class="ml-2">{{ guild.name }}</span>
+                  <img v-if="guild.owner" src="~/assets/img/owner.png" class="inline w-4 h-4 ml-1" />
+                  <img v-if="guild.permissions & (1 << 13) && !guild.owner" src="~/assets/img/moderator.svg" class="inline w-4 h-4 ml-1" />
+                  <img v-if="guild.features.includes('PARTNERED')" src="~/assets/img/partner.png" class="inline w-4 h-4 ml-1" />
+                  <img v-if="guild.features.includes('VERIFIED')" src="~/assets/img/verified.png" class="inline w-4 h-4 ml-1" />
+                </div>
               </div>
             </div>
           </transition>
