@@ -14,7 +14,8 @@
           this data is stored or logged. We log ratelimits to prevent abuse, and errors to help fix bugs, but that's all. Our entire source code is availbile on GitHub.
         </p>
         <p class="sm:text-md text-gray-200 mt-2">
-          We run public analytics on our website provided by SimpleAnalytics. SimpleAnalytics is GDPA compliant and DOES NOT store IP addresses, cookies, or any other user data.
+          We run public analytics on our website provided by SimpleAnalytics. SimpleAnalytics is GDPA compliant and DOES NOT store or use IP addresses, cookies, or any other user
+          data.
         </p>
         <p class="sm:text-xl font-semibold text-gray-200 mt-5">Links:</p>
         <ul class="list-disc ml-10 mb-5">

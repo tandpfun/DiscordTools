@@ -29,7 +29,19 @@
             <div v-if="snowflake" class="mt-5">
               <h1 class="mb-1 text-3xl font-bold text-center text-white">Info:</h1>
               <transition name="height">
-                <p v-if="!validateSnowflake(snowflake)" class="text-md text-gray-200 text-center">That doesn't look like a valid snowflake!</p>
+                <div v-if="snowflake == '❄️' || snowflake == '❄' || snowflake.toLowerCase() == 'snowflake'">
+                  <iframe
+                    width="560"
+                    height="315"
+                    class="mx-auto"
+                    src="https://www.youtube.com/embed/a3Z7zEc7AXQ?controls=0&autoplay=1"
+                    title="I'm gonna give you up"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+                <p v-else-if="!validateSnowflake(snowflake)" class="text-md text-gray-200 text-center">That doesn't look like a valid snowflake!</p>
                 <div v-else class="text-center text-white">
                   <p class="text-xl text-gray-200 text-center">
                     <b>{{ (new Date().toString().split('(')[1] || '').slice(0, -1) }}:</b> {{ fetchTimestamp(snowflake).toLocaleString() }}

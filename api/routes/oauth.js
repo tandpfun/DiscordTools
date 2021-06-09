@@ -145,6 +145,7 @@ async function getGuild(id) {
           guild: {},
         }
     })
+
   if (data) {
     let request = await axios
       .get(`https://discord.com/api/v8/guilds/${id}/preview`, {
@@ -155,6 +156,7 @@ async function getGuild(id) {
       .catch((err) => null)
     if (request?.data) {
       data.guild = Object.assign(request.data, data.guild)
+      data.disabled = false
     }
   }
   return data
