@@ -26,7 +26,6 @@
     "chalk": "^4.1.0",
     "core-js": "^3.8.3",
     "discord-webhook-node": "^1.1.8",
-    "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
