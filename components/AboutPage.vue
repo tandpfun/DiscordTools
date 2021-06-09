@@ -9,33 +9,44 @@
       </div>
       <div class="bg-dark-dark max-w-6xl px-10 py-10 mx-auto mt-8 text-left rounded text-white">
         <p class="sm:text-xl font-semibold text-gray-200">Privacy Policy:</p>
-        <p class="sm:text-md text-gray-200 mt-1">DiscordTools stores no user data. When authorizing DiscordTools' access to your account, we are given basic user information and a list of the servers you are in. None of this data is stored or logged. We log ratelimits to prevent abuse, and errors to help fix bugs, but that's all. Our entire source code is availbile on GitHub.</p>
-        <p class="sm:text-md text-gray-200 mt-2">We run public analytics on our website provided by SimpleAnalytics. SimpleAnalytics is GDPA compliant and DOES NOT store IP addresses, cookies, or any other user data.</p>
+        <p class="sm:text-md text-gray-200 mt-1">
+          DiscordTools stores no user data. When authorizing DiscordTools' access to your account, we are given basic user information and a list of the servers you are in. None of
+          this data is stored or logged. We log ratelimits to prevent abuse, and errors to help fix bugs, but that's all. Our entire source code is availbile on GitHub.
+        </p>
+        <p class="sm:text-md text-gray-200 mt-2">
+          We run public analytics on our website provided by SimpleAnalytics. SimpleAnalytics is GDPA compliant and DOES NOT store IP addresses, cookies, or any other user data.
+        </p>
         <p class="sm:text-xl font-semibold text-gray-200 mt-5">Links:</p>
         <ul class="list-disc ml-10 mb-5">
-          <li><font-awesome-icon :icon="['fab', 'github']" />
+          <li>
+            <font-awesome-icon :icon="['fab', 'github']" />
             <a class="text-blue-500 hover:text-blue-600 transition duration-250" href="https://github.com/tandpfun/DiscordTools" target="_blank"> Github</a>
           </li>
-          <li><font-awesome-icon :icon="['fab', 'discord']" />
+          <li>
+            <font-awesome-icon :icon="['fab', 'discord']" />
             <a class="text-blue-500 hover:text-blue-600 transition duration-250" href="https://discord.gg/GFsA2x7j4F" target="_blank"> Discord Server</a>
           </li>
-          <li><font-awesome-icon :icon="['fas', 'chart-area']" />
+          <li>
+            <font-awesome-icon :icon="['fas', 'chart-area']" />
             <a class="text-blue-500 hover:text-blue-600 transition duration-250" href="https://simpleanalytics.com/discordtools.io" target="_blank"> Analytics</a>
           </li>
         </ul>
 
         <p class="sm:text-xl font-semibold text-gray-200">Contributors:</p>
         <ul class="list-disc ml-10">
-          <li>Lead Developer: 
+          <li>
+            Lead Developer:
             <a v-for="c in contributors.lead" class="text-blue-500 hover:text-blue-600 transition duration-250" :key="c[1]" :href="c[1]" target="_blank">{{ c[0] }} </a>
           </li>
-          <li>Major Contributor: 
+          <li>
+            Major Contributor:
             <a v-for="c in contributors.major" class="text-blue-500 hover:text-blue-600 transition duration-250" :key="c[1]" :href="c[1]" target="_blank">{{ c[0] }} </a>
           </li>
-          <li>Minor Contributors: 
+          <li>
+            Minor Contributors:
             <a v-for="c in contributors.minor" class="text-blue-500 hover:text-blue-600 transition duration-250" :key="c[1]" :href="c[1]" target="_blank">{{ c[0] }} </a>
           </li>
-      </ul>
+        </ul>
       </div>
     </div>
   </div>
@@ -94,8 +105,11 @@ export default {
       contributors: {
         lead: [['Coding', 'https://github.com/tandpfun']],
         major: [['Megumin', 'https://github.com/meguminsama']],
-        minor: [['Polar', 'https://github.com/xPolar'], ['CommandTechno', 'https://github.com/Commandtechno']],
-      }
+        minor: [
+          ['Polar', 'https://github.com/xPolar'],
+          ['CommandTechno', 'https://github.com/Commandtechno'],
+        ],
+      },
     }
   },
 }

@@ -49,9 +49,7 @@
                   <div class="text-3xl text-center text-white mt-2 max-w-xl mx-auto" v-else-if="dataFetched">
                     <template v-if="data.type == 'user'">
                       <img
-                        :src="
-                          data.avatar ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '?size=256' : 'https://cdn.discordapp.com/embed/avatars/0.png'
-                        "
+                        :src="data.avatar ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '?size=256' : 'https://cdn.discordapp.com/embed/avatars/0.png'"
                         class="rounded-full m-1 mx-auto"
                         style="width: 75px; height: 75px"
                       />
