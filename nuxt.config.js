@@ -94,10 +94,11 @@ export default {
     vendor: ['~/assets/js/outline.js'],
   },
 
+  /*
   watchers: {
     webpack: {
       aggregateTimeout: 300,
       poll: 1000,
     },
-  },
+  },*/
 }
