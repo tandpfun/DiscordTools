@@ -76,13 +76,13 @@
               >
             </NuxtLink>
           </div>
-          <!--<div class="nav-item px-2 py-2 ml-2">
-            <NuxtLink to="/datamine">
-              <span v-bind:class="($nuxt.$route.name === 'datamine' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'"
-                >Datamine</span
+          <div class="nav-item px-2 py-2 ml-2">
+            <NuxtLink to="/about">
+              <span v-bind:class="($nuxt.$route.name === 'about' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'"
+                >About</span
               >
             </NuxtLink>
-          </div>-->
+          </div>
         </div>
         <div v-if="!loggedIn" class="nav-item ml-auto">
           <a href="/login">
@@ -176,13 +176,13 @@
                 >
               </NuxtLink>
             </div>
-            <!--<div class="nav-item px-2 py-2 ml-2">
-              <NuxtLink to="/datamine">
-                <span v-bind:class="($nuxt.$route.name === 'datamine' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition'"
-                  >Datamine</span
+            <div class="nav-item px-2 py-2 ml-2">
+              <NuxtLink to="/about">
+                <span v-bind:class="($nuxt.$route.name === 'about' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') + ' flex items-center font-medium text-base leading-snug text-white relative transition'"
+                  >About</span
                 >
               </NuxtLink>
-            </div>-->
+            </div>
           </div>
           <div v-if="!loggedIn" class="nav-item ml-auto">
             <a href="/login">

@@ -4,7 +4,9 @@
     <div class="content">
       <Nuxt />
     </div>
-    <Footer />
+    <!--<Footer />-->
+    <script async defer src="https://sa.discordtools.io/latest.js"></script>
+    <noscript><img src="https://sa.discordtools.io/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
   </div>
 </template>
 
