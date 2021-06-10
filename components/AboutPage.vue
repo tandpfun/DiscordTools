@@ -11,7 +11,7 @@
         <p class="sm:text-xl font-semibold text-gray-200">Privacy Policy:</p>
         <p class="sm:text-md text-gray-200 mt-1">
           DiscordTools stores no user data. When authorizing DiscordTools' access to your account, we are given basic user information and a list of the servers you are in. None of
-          this data is stored or logged. We log ratelimits to prevent abuse, and errors to help fix bugs, but that's all. Our entire source code is availbile on GitHub.
+          this data is stored or logged. We log ratelimits to prevent abuse, and errors to help fix bugs, but that's all. Our entire source code is available on GitHub.
         </p>
         <p class="sm:text-md text-gray-200 mt-2">
           We run public analytics on our website provided by SimpleAnalytics. SimpleAnalytics is GDPA compliant and DOES NOT store or use IP addresses, cookies, or any other user
