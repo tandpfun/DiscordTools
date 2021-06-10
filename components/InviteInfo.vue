@@ -70,9 +70,16 @@
                       <p class="text-xl text-gray-200 text-center" v-if="data.expires_at">
                         <b>Invite Expires:</b> {{ inviteExpires(data.expires_at).toLocaleString() }} [{{ (new Date().toString().split('(')[1] || '').slice(0, -1) }}]
                       </p>
-                      <p class="text-xl text-gray-200 text-center" v-if="data.guild.features[0]">
-                        <b>Features:</b> <span class="text-sm tracking-tight">{{ data.guild.features.join(', ') }}</span>
-                      </p>
+                      <div class="text-xl text-gray-200 text-center" v-if="data.guild.features[0]">
+                        <b>Features:</b>
+                        <div class="flex">
+                          <ul class="list-disc text-sm tracking-tight text-left flex flex-col flex-shrink mx-auto py-2 px-4 mb-1 bg-dark-darker rounded-md list-inside">
+                            <li v-for="feature in data.guild.features" :key="feature">
+                              {{ sentanceCap(feature) }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                       <p class="text-xl text-gray-200 text-center" v-if="data.code">
                         <b>Invite:</b> <a class="text-blue-400" :href="'https://discord.gg/' + data.code">Click Here</a>
                       </p>
@@ -172,6 +179,16 @@ export default {
       const date = new Date(expires)
       console.log(date.getTime())
       return date
+    },
+    sentanceCap(str) {
+      return str
+        .toLowerCase()
+        .replace(/_/g, ' ')
+        .split(' ')
+        .map(function (word) {
+          return word[0].toUpperCase() + word.substr(1)
+        })
+        .join(' ')
     },
     parseURLParams(url) {
       var queryStart = url.indexOf('?') + 1,
