@@ -3,33 +3,32 @@
     <div class="align-center mx-5 text-center">
       <div class="sm:my-auto max-w-2xl mx-auto my-10">
         <h1 class="md:text-5xl mb-2 text-3xl font-bold text-gray-900">
-          <span class="text-discord-blurple block">Snowflake Decoder</span>
+          <span class="text-discord-blurple block">Invite Information</span>
         </h1>
-        <p class="sm:text-xl text-md text-gray-200">Get the creation date of any snowflake ID, and search Discord for it.</p>
+        <p class="sm:text-xl text-md text-gray-200">Get information on an invite or vanity url.</p>
       </div>
       <div class="bg-dark-dark max-w-6xl px-10 py-10 mx-auto mt-8 text-left rounded">
         <div>
-          <h1 class="mb-1 text-3xl font-bold text-center text-white">Snowflake:</h1>
+          <h1 class="mb-1 text-3xl font-bold text-center text-white">Invite:</h1>
           <div class="relative text-gray-600 focus-within:text-gray-400 transition duration-250">
-            <div class="w-full lg:w-3/12 mx-auto">
+            <div class="w-full lg:w-4/12 mx-auto">
               <span class="absolute inset-y-0 items-center pl-3 pt-1.5 text-gray-200">
-                <font-awesome-icon :icon="['fas', 'snowflake']" />
+                <font-awesome-icon :icon="['fas', 'link']" />
               </span>
               <input
-                name="snowflake"
+                name="invite"
                 class="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 transition duration-250 focus:outline-none focus:bg-white focus:text-gray-900 w-full"
-                placeholder="276544649148235776"
-                v-model="snowflake"
-                maxlength="19"
+                placeholder="discord.gg/invite"
+                v-model="invite"
                 autocomplete="off"
               />
             </div>
           </div>
           <transition name="height">
-            <div v-if="snowflake" class="mt-5">
+            <div v-if="invite" class="mt-5">
               <h1 class="mb-1 text-3xl font-bold text-center text-white">Info:</h1>
               <transition name="height">
-                <div v-if="snowflake == '❄️' || snowflake == '❄' || snowflake.toLowerCase() == 'snowflake'">
+                <div v-if="invite == 'discord'">
                   <iframe
                     width="560"
                     height="315"
@@ -41,13 +40,8 @@
                     allowfullscreen
                   ></iframe>
                 </div>
-                <p v-else-if="!validateSnowflake(snowflake)" class="text-md text-gray-200 text-center">That doesn't look like a valid snowflake!</p>
+                <p v-else-if="!validateInvite(invite)" class="text-md text-gray-200 text-center">That doesn't look like a valid invite!</p>
                 <div v-else class="text-center text-white">
-                  <p class="text-xl text-gray-200 text-center">
-                    <b>{{ (new Date().toString().split('(')[1] || '').slice(0, -1) }}:</b> {{ fetchTimestamp(snowflake).toLocaleString() }}
-                  </p>
-                  <p class="text-xl text-gray-200 text-center"><b>UNIX:</b> {{ fetchTimestamp(snowflake).getTime() / 1000 }}</p>
-                  <h1 class="mb-1 text-3xl font-bold text-center text-white mt-8">Discord Info:</h1>
                   <div class="text-3xl font-bold text-center text-white mt-2" v-if="loading">
                     <svg class="animate-spin w-8 h-8 mx-auto" viewBox="0 0 24 24">
                       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -59,64 +53,33 @@
                     </svg>
                   </div>
                   <div class="text-3xl text-center text-white mt-2 max-w-xl mx-auto" v-else-if="dataFetched">
-                    <template v-if="data.type == 'user'">
-                      <img
-                        :src="data.avatar ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '?size=256' : 'https://cdn.discordapp.com/embed/avatars/0.png'"
-                        class="rounded-full m-1 mx-auto"
-                        style="width: 75px; height: 75px"
-                      />
-                      <p class="text-xl text-gray-200 text-center"><b>Type:</b> {{ data.bot ? 'Bot' : 'User' }}</p>
-                      <p class="text-xl text-gray-200 text-center"><b>Username:</b> {{ data.username }}#{{ data.discriminator }}</p>
-                      <!-- <p class="text-xl text-gray-200 text-center"><b>Badges:</b> Coming Soon</p> -->
-                      <p class="text-xl text-gray-200 text-center"><b>Created:</b> {{ fetchTimestamp(snowflake).toLocaleString() }}</p>
-                      <p class="text-xl text-gray-200 text-center"><b>Bot:</b> {{ data.bot || 'false' }}</p>
-                    </template>
-                    <template v-else-if="data.type == 'guild'">
-                      <img
-                        v-if="!data.disabled && data.guild.icon"
-                        :src="
-                          data.guild.icon
-                            ? 'https://cdn.discordapp.com/icons/' + data.guild.id + '/' + data.guild.icon + '?size=256'
-                            : 'https://cdn.discordapp.com/embed/avatars/0.png'
-                        "
-                        class="rounded-full m-1 mx-auto"
-                        style="width: 75px; height: 75px"
-                      />
-                      <p class="text-xl text-gray-200 text-center"><b>Type:</b> Server</p>
-                      <div v-if="data.disabled">
-                        <p class="text-xl text-gray-200 text-center">Widget is Disabled</p>
-                      </div>
-                      <div v-else class="text-center">
-                        <p class="text-xl text-gray-200 text-center"><b>Name:</b> {{ data.guild.name }}</p>
-                        <p class="text-xl text-gray-200 text-center">
-                          <b>Members:</b>
-                          {{
-                            data.guild.approximate_member_count
-                              ? addCommas(data.guild.approximate_member_count)
-                              : null || (data.guild.members.length == 100 ? 'More than 100' : data.guild.members.length) || 'Unknown'
-                          }}
-                        </p>
-                        <p class="text-xl text-gray-200 text-center" v-if="data.guild.emojis ? data.guild.emojis.length : null"><b>Emojis:</b> {{ data.guild.emojis.length }}</p>
-                        <p class="text-xl text-gray-200 text-center" v-if="data.guild.description"><b>Description:</b> {{ data.guild.description }}</p>
-                        <p class="text-xl text-gray-200 text-center" v-if="data.guild.instant_invite">
-                          <b>Invite:</b> <a class="text-blue-400" :href="data.guild.instant_invite">Click Here</a>
-                        </p>
-                      </div>
-                    </template>
+                    <img
+                      v-if="data.guild.icon"
+                      :src="
+                        data.guild.icon
+                          ? 'https://cdn.discordapp.com/icons/' + data.guild.id + '/' + data.guild.icon + '?size=256'
+                          : 'https://cdn.discordapp.com/embed/avatars/0.png'
+                      "
+                      class="rounded-full m-1 mx-auto"
+                      style="width: 75px; height: 75px"
+                    />
+                    <div class="text-center">
+                      <p class="text-xl text-gray-200 text-center"><b>Name:</b> {{ data.guild.name }}</p>
+                      <p class="text-xl text-gray-200 text-center" v-if="data.guild.description"><b>Description:</b> {{ data.guild.description }}</p>
+                      <p class="text-xl text-gray-200 text-center" v-if="data.approximate_member_count"><b>Member Count:</b> {{ addCommas(data.approximate_member_count) }}</p>
+                      <p class="text-xl text-gray-200 text-center" v-if="data.expires_at">
+                        <b>Invite Expires:</b> {{ inviteExpires(data.expires_at).toLocaleString() }} [{{ (new Date().toString().split('(')[1] || '').slice(0, -1) }}]
+                      </p>
+                      <p class="text-xl text-gray-200 text-center" v-if="data.guild.features[0]">
+                        <b>Features:</b> <span class="text-sm tracking-tight">{{ data.guild.features.join(', ') }}</span>
+                      </p>
+                      <p class="text-xl text-gray-200 text-center" v-if="data.code">
+                        <b>Invite:</b> <a class="text-blue-400" :href="'https://discord.gg/' + data.code">Click Here</a>
+                      </p>
+                    </div>
                   </div>
                   <div class="text-2xl font-bold text-center text-white mt-2" v-else-if="fetchError.error">
-                    <template v-if="fetchError.type == 'login'">
-                      <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> Please Log In
-                      <div class="text-lg mt-4">
-                        <a
-                          class="transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-2 px-5 rounded-md transition duration-250 bg-discord-blurple text-lg"
-                          href="/login"
-                        >
-                          Log In
-                        </a>
-                      </div>
-                    </template>
-                    <template v-else-if="fetchError.type == 'invalid'"> <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> Not Found </template>
+                    <template v-if="fetchError.type == 'invalid'"> <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> Not Found </template>
                     <template v-else-if="fetchError.type == 'ratelimit'">
                       <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> You're Being Ratelimited
                       <div class="sm:flex justify-center mt-2 text-center">
@@ -134,7 +97,7 @@
                             duration-250
                             bg-discord-blurple
                           "
-                          @click="fetchFromDiscord"
+                          @click="fetchInvite"
                         >
                           Try Again
                         </a>
@@ -145,9 +108,9 @@
                   <div class="sm:flex justify-center mt-2 text-center" v-else>
                     <a
                       class="cursor-pointer transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-2 px-5 rounded-md transition duration-250 bg-discord-blurple"
-                      @click="fetchFromDiscord"
+                      @click="fetchInvite"
                     >
-                      Fetch From Discord
+                      Fetch
                     </a>
                   </div>
                 </div>
@@ -199,23 +162,16 @@ export default {
       while (pattern.test(x)) x = x.replace(pattern, '$1,$2')
       return x
     },
-    validateSnowflake(snowflake) {
-      const epoch = 1420070400000
-
-      if (!snowflake) return false
-      if (isNaN(snowflake)) return false
-      if (snowflake < 4194304) return false
-
-      const timestamp = new Date(snowflake / 4194304 + epoch)
-      if (isNaN(timestamp.getTime())) return false
+    validateInvite(invite) {
+      if (!invite) return false
+      if (invite.length < 2) return false
 
       return true
     },
-    fetchTimestamp(snowflake) {
-      const epoch = 1420070400000
-      const timestamp = new Date(snowflake / 4194304 + epoch)
-      if (isNaN(timestamp.getTime())) return 0
-      else return timestamp
+    inviteExpires(expires) {
+      const date = new Date(expires)
+      console.log(date.getTime())
+      return date
     },
     parseURLParams(url) {
       var queryStart = url.indexOf('?') + 1,
@@ -240,11 +196,25 @@ export default {
       }
       return parms
     },
-    fetchFromDiscord() {
+    fetchInvite() {
       this.loading = true
 
+      let invite = this.invite
+      let inviteMatch = invite.match(/(?:https?:\/\/)?(?:\w+\.)?discord(?:(?:app)?\.com\/invite|\.gg)\/([A-Za-z0-9-]+)/)
+
+      let inviteDecoded
+      if (!inviteMatch?.[0]) {
+        inviteDecoded = invite
+      } else inviteDecoded = inviteMatch[1]
+
+      if (!inviteDecoded) {
+        this.loading = false
+        this.fetchError.error = true
+        return (this.fetchError.type = 'invalid')
+      }
+
       axios
-        .get(`/api/fetch/snowflake/${this.snowflake}`)
+        .get(`https://discord.com/api/v8/invites/${inviteDecoded}?with_counts=1&with_expiration=1`)
         .then((res) => {
           let data = res.data
           if (!data) {
@@ -263,8 +233,8 @@ export default {
           console.log(err)
           if (process.client) {
             console.log('FETCH ERROR')
-            if (err.response?.status === 401) this.fetchError.type = 'login'
-            if (err.response?.status === 400) this.fetchError.type = 'invalid'
+            console.log(err.response.data.message)
+            if (err.response?.data?.message === 'Unknown Invite' || err.response?.status === 400) this.fetchError.type = 'invalid'
             if (err.response?.status === 429) this.fetchError.type = 'ratelimit'
 
             this.loading = false
@@ -275,7 +245,7 @@ export default {
   },
   data() {
     return {
-      snowflake: '',
+      invite: '',
       loading: false,
       dataFetched: false,
       fetchError: {
@@ -286,7 +256,7 @@ export default {
     }
   },
   watch: {
-    snowflake: function (val, oldVal) {
+    invite: function (val, oldVal) {
       this.loading = false
       this.dataFetched = false
       this.fetchError = {
@@ -295,10 +265,10 @@ export default {
       }
       this.data = {}
 
-      if (val) window.history.replaceState(null, null, `?s=${this.snowflake}`)
+      if (val) window.history.replaceState(null, null, `?i=${this.invite}`)
       else {
         const url = new URL(location)
-        url.searchParams.delete('s')
+        url.searchParams.delete('i')
         history.replaceState(null, null, url)
       }
     },
@@ -308,9 +278,9 @@ export default {
       if (process.client) {
         let urlParams = this.parseURLParams(location.href)
         if (!urlParams) return
-        if (urlParams.s?.[0] && typeof urlParams.s?.[0] === 'string') {
-          this.snowflake = urlParams.s[0]
-          console.log(urlParams.s[0])
+        if (urlParams.i?.[0] && typeof urlParams.i?.[0] === 'string') {
+          this.invite = urlParams.i[0]
+          console.log(urlParams.i[0])
         }
       }
     })

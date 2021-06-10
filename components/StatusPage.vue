@@ -5,7 +5,7 @@
         <h1 class="md:text-5xl mb-2 text-3xl font-bold text-gray-900">
           <span class="text-discord-blurple block">Discord Status</span>
         </h1>
-        <p class="sm:text-xl text-md text-gray-200">Below is the status of Discord as well as other information</p>
+        <p class="sm:text-xl text-md text-gray-200">Below is the status of Discord as well as other information.</p>
       </div>
       <div class="bg-dark-dark max-w-6xl px-10 py-10 mx-auto mt-8 text-left rounded">
         <div class="text-3xl font-bold text-center text-white" v-if="loading">

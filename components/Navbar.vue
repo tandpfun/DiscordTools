@@ -44,6 +44,17 @@
             </NuxtLink>
           </div>
           <div class="nav-item px-2 py-2 ml-2">
+            <NuxtLink to="/tools">
+              <span
+                v-bind:class="
+                  ($nuxt.$route.name === 'tools' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
+                  ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
+                "
+                >Tools</span
+              >
+            </NuxtLink>
+          </div>
+          <div class="nav-item px-2 py-2 ml-2">
             <NuxtLink to="/guildcount">
               <span
                 v-bind:class="
@@ -144,6 +155,17 @@
                     ' flex items-center font-medium text-base leading-snug text-white relative transition'
                   "
                   >Home</span
+                >
+              </NuxtLink>
+            </div>
+            <div class="nav-item px-2 py-2 ml-2">
+              <NuxtLink to="/tools">
+                <span
+                  v-bind:class="
+                    ($nuxt.$route.name === 'tools' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
+                    ' flex items-center font-medium text-base leading-snug text-white relative transition'
+                  "
+                  >Tools</span
                 >
               </NuxtLink>
             </div>

@@ -5,9 +5,9 @@
       <h1 class="xl:text-4xl mt-2 text-3xl font-medium text-gray-100">Utilities for Power Users</h1>
       <div class="sm:mt-8 sm:flex justify-center mt-5">
         <div>
-          <a href="#" v-scroll-to="'#tools'">
+          <NuxtLink to="/tools">
             <button class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-3 px-7 rounded-lg transition duration-250">Tools</button>
-          </a>
+          </NuxtLink>
         </div>
         <div class="sm:mt-0 sm:ml-3 mt-3">
           <NuxtLink to="/guildcount">

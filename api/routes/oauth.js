@@ -178,8 +178,8 @@ async function fetchUser(id) {
 }
 
 // Fetch Data Endpoint
-router.get('/api/fetch/:id', async (req, res) => {
-  if (!req.isAuthenticated()) return res.sendStatus(401)
+router.get('/api/fetch/snowflake/:id', async (req, res) => {
+  //if (!req.isAuthenticated()) return res.sendStatus(401)
   let id = req.params.id
   if (isNaN(id)) return res.sendStatus(400)
 
