@@ -5,8 +5,10 @@
       <Nuxt />
     </div>
     <!--<Footer />-->
-    <script async defer src="https://sa.discordtools.io/latest.js"></script>
-    <noscript><img src="https://sa.discordtools.io/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <client-only>
+      <script async defer src="https://sa.discordtools.io/latest.js"></script>
+      <noscript><img src="https://sa.discordtools.io/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    </client-only>
   </div>
 </template>
 

@@ -14,7 +14,9 @@
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
         </div>
-        <div class="text-3xl font-bold text-center text-gray-400" v-else-if="fetchError"><font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> Error Fetching Guilds</div>
+        <div class="text-3xl font-bold text-center text-gray-400" v-else-if="fetchError">
+          <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> {{ errorCode == 429 ? "You're Being Ratelimited" : 'Error Fetching Guilds' }}
+        </div>
         <div v-else>
           <h1 class="mb-1 text-3xl font-bold text-center text-gray-900">
             <span class="block text-white"
@@ -248,7 +250,7 @@ export default {
       this.popup.visible = true
       this.popup.type = type
     },
-    async fetchStats() {
+    fetchStats() {
       axios
         .get(process.env.baseUrl + '/api/users/@me/guilds')
         .then((req) => {
@@ -273,6 +275,8 @@ export default {
             else {
               this.loading = false
               this.fetchError = true
+              this.errorCode = err.response?.status
+              console.log(this.errorCode)
             }
           }
         })
@@ -295,6 +299,7 @@ export default {
       loading: true,
       fetchError: false,
       showList: false,
+      errorCode: null,
       popup: {
         visible: false,
         title: '',
@@ -302,8 +307,11 @@ export default {
       },
     }
   },
-  async created() {
-    if (process.client) this.fetchStats()
+  async mounted() {
+    if (process.server) return
+    this.$nextTick(() => {
+      if (process.client) this.fetchStats()
+    })
   },
 }
 </script>

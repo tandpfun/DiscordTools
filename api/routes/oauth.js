@@ -203,7 +203,7 @@ router.get('/api/users/@me/guilds', async (req, res) => {
         Authorization: `Bearer ${req.user.accessToken}`,
       },
     })
-    .catch(() => null)
+    .catch((err) => console.error(`Error fetching ${req.user?.username}#${req.user?.discriminator}'s guilds: ${err.response?.status}`))
 
   if (!reqGuilds) return res.sendStatus(429)
 

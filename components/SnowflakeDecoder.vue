@@ -295,14 +295,18 @@ export default {
       }
       this.data = {}
 
-      window.history.replaceState(null, null, `?s=${this.snowflake}`)
+      if (val) window.history.replaceState(null, null, `?s=${this.snowflake}`)
+      else {
+        const url = new URL(location)
+        url.searchParams.delete('s')
+        history.replaceState(null, null, url)
+      }
     },
   },
   async mounted() {
     this.$nextTick(() => {
       if (process.client) {
         let urlParams = this.parseURLParams(location.href)
-        console.log(urlParams)
         if (!urlParams) return
         if (urlParams.s?.[0] && typeof urlParams.s?.[0] === 'string') {
           this.snowflake = urlParams.s[0]
