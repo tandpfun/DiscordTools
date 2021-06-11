@@ -8,7 +8,7 @@
         <p class="sm:text-xl text-md text-gray-200">This is a full list of all tools on the DiscordTools website!</p>
       </div>
       <div class="bg-dark-dark max-w-6xl px-10 py-10 mx-auto mt-8 text-left rounded text-white flex-row">
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap flex-col">
           <NuxtLink
             v-for="tool in tools"
             :key="tool.page"
@@ -17,7 +17,7 @@
           >
             <img class="inline w-12 rounded-full" :src="`/icons/${tool.page}.png`" />
             <h2 class="text-white font-semibold text-md ml-3 mt-1 md:mt-0">{{ tool.name }}:</h2>
-            <p class="text-white text-sm text-center md:text-left mt-1 ml-0 md:mt-0 md:ml-2">{{ tool.desc }}</p>
+            <p class="text-white text-md text-center md:text-left mt-1 ml-0 md:mt-0 md:ml-2">{{ tool.desc }}</p>
           </NuxtLink>
         </div>
       </div>
@@ -80,6 +80,7 @@ export default {
         { name: 'Snowflake Decoder', page: 'snowflake', desc: 'Get the creation date of any snowflake ID, and search Discord for users & guilds with it.' },
         { name: 'Discord Status', page: 'status', desc: "See Discord's status and ping, as well as if Staging is open." },
         { name: 'Invite Info', page: 'inviteinfo', desc: 'Get information on any invite link or vanity url.' },
+        { name: 'Text to Emoji', page: 'textemoji', desc: 'Convert text to regional inicator emojis!' },
       ],
     }
   },
