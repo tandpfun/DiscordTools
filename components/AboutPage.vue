@@ -5,7 +5,7 @@
         <h1 class="md:text-5xl mb-2 text-3xl font-bold text-gray-900">
           <span class="text-discord-blurple block">About DiscordTools</span>
         </h1>
-        <p class="sm:text-xl text-md text-gray-200">DiscordTools is an open-sourced Discord utilities website.</p>
+        <p class="sm:text-xl text-md text-gray-200">DiscordTools is an open-source Discord utilities website.</p>
       </div>
       <div class="bg-dark-dark max-w-6xl px-10 py-10 mx-auto mt-8 text-left rounded text-white">
         <p class="sm:text-xl font-semibold text-gray-200">Privacy Policy:</p>
