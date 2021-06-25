@@ -80,7 +80,7 @@ export default {
         { name: 'Snowflake Decoder', page: 'snowflake', desc: 'Get the creation date of any snowflake ID, and search Discord for users & guilds with it.' },
         { name: 'Discord Status', page: 'status', desc: "See Discord's status and ping, as well as if Staging is open." },
         { name: 'Invite Info', page: 'inviteinfo', desc: 'Get information on any invite link or vanity url.' },
-        { name: 'Text to Emoji', page: 'textemoji', desc: 'Convert text to regional inicator emojis!' },
+        { name: 'Text to Emoji', page: 'textemoji', desc: 'Convert text to regional indicator emojis!' },
       ],
     }
   },
