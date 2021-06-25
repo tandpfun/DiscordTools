@@ -15,7 +15,7 @@
             class="bg-dark-darker rounded-lg p-4 m-2 flex-grow flex items-center flex-col md:flex-row hover:-translate-y-0.5 hover:shadow-md transform transition duration-250"
             :to="'/' + tool.page"
           >
-            <img class="inline w-12 rounded-full" :src="`/icons/${tool.page}.png`" />
+            <img class="inline w-12 h-12 bg-dark-dark rounded-full" :src="`/icons/${tool.page}.png`" />
             <h2 class="text-white font-semibold text-md ml-3 mt-1 md:mt-0">{{ tool.name }}:</h2>
             <p class="text-white text-md text-center md:text-left mt-1 ml-0 md:mt-0 md:ml-2">{{ tool.desc }}</p>
           </NuxtLink>
