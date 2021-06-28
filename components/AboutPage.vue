@@ -110,7 +110,7 @@ export default {
           ['Polar', 'https://github.com/xPolar'],
           ['Commandtechno', 'https://github.com/Commandtechno'],
           ['Toasty', 'https://github.com/toastythetoaster'],
-          ['Techy', 'https://github.com/Techy']
+          ['Techy', 'https://github.com/Techy'],
         ],
       },
     }

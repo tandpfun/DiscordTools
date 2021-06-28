@@ -47,7 +47,7 @@ setInterval(async () => {
 
   if (discordStagingRedir?.request?.host.includes('cloudflareaccess')) status.staging.open = false
   else status.staging.open = true
-}, 15000)
+}, 60000)
 
 router.get('/api/discordstatus', (req, res) => {
   res.send(status)
