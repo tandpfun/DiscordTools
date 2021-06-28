@@ -108,7 +108,9 @@ export default {
         major: [['Megumin', 'https://github.com/meguminsama']],
         minor: [
           ['Polar', 'https://github.com/xPolar'],
-          ['CommandTechno', 'https://github.com/Commandtechno'],
+          ['Commandtechno', 'https://github.com/Commandtechno'],
+          ['Toasty', 'https://github.com/toastythetoaster'],
+          ['Techy', 'https://github.com/Techy']
         ],
       },
     }
