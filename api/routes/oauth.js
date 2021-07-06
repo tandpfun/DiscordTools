@@ -77,15 +77,15 @@ router.get(
   '/login',
   (req, res, next) => {
     // We determine the returning url.
-    if (req.session.backURL) {
-      req.session.backURL = req.session.backURL
+    if (req.session.backUrl || req.query.backUrl) {
+      req.session.backUrl = req.session.backUrl || req.query.backUrl
     } else if (req.headers.referer) {
       const parsed = url.parse(req.headers.referer)
       if (parsed.hostname === domain) {
         req.session.backURL = parsed.path
       }
     } else {
-      req.session.backURL = '/'
+      req.session.backUrl = '/'
     }
     // Forward the request to the passport middleware.
     next()
@@ -107,12 +107,12 @@ router.get(
   passport.authenticate('discord', { failureRedirect: '/' }),
   /* We authenticate the user, if user canceled we redirect them to index. */ (req, res) => {
     // If user had set a returning url, we redirect them there, otherwise we redirect them to index.
-    const url = req.session.backURL
+    const url = req.session.backUrl
     if (url) {
-      req.session.backURL = null
+      req.session.backUrl = null
       res.redirect(url)
     } else {
-      res.redirect('/guildcount')
+      res.redirect('/')
     }
   }
 )

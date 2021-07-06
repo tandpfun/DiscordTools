@@ -110,13 +110,13 @@
                       <div class="text-lg mt-4">
                         <a
                           class="transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-2 px-5 rounded-md transition duration-250 bg-discord-blurple text-lg"
-                          href="/login"
+                          :href="`/login?backUrl=/snowflake${snowflake ? `?s=${snowflake}` : ''}`"
                         >
                           Log In
                         </a>
                       </div>
                     </template>
-                    <template v-else-if="fetchError.type == 'invalid'"> <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> Not Found </template>
+                    <template v-else-if="fetchError.type == 'invalid'"> <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> Nothing Found </template>
                     <template v-else-if="fetchError.type == 'ratelimit'">
                       <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> You're Being Ratelimited
                       <div class="sm:flex justify-center mt-2 text-center">

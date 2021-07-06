@@ -10,9 +10,9 @@
           </NuxtLink>
         </div>
         <div class="sm:mt-0 sm:ml-3 mt-3">
-          <NuxtLink to="/guildcount">
+          <a href="/login">
             <button class="bg-white transform hover:-translate-y-0.5 hover:shadow-md text-black font-bold py-3 px-7 rounded-lg transition duration-250">Log In</button>
-          </NuxtLink>
+          </a>
         </div>
       </div>
     </div>

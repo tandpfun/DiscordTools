@@ -77,6 +77,17 @@
             </NuxtLink>
           </div>
           <div class="nav-item px-2 py-2 ml-2">
+            <NuxtLink to="/inviteinfo">
+              <span
+                v-bind:class="
+                  ($nuxt.$route.name === 'inviteinfo' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
+                  ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
+                "
+                >Invite Info</span
+              >
+            </NuxtLink>
+          </div>
+          <div class="nav-item px-2 py-2 ml-2">
             <NuxtLink to="/status">
               <span
                 v-bind:class="
@@ -100,8 +111,8 @@
           </div>
         </div>
         <div v-if="!loggedIn" class="nav-item ml-auto">
-          <a href="/login">
-            <div class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-xl text-white font-bold py-3 px-7 rounded-md transition duration-250">Log In</div>
+          <a :href="'/login?backUrl=/' + $nuxt.$route.name">
+            <div class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-xl text-white font-bold py-3 px-6 rounded-md transition duration-250">Log In</div>
           </a>
         </div>
         <div v-else class="nav-item relative inline-block ml-auto" ref="dropdown">
@@ -192,6 +203,17 @@
               </NuxtLink>
             </div>
             <div class="nav-item px-2 py-2 ml-2">
+              <NuxtLink to="/inviteinfo">
+                <span
+                  v-bind:class="
+                    ($nuxt.$route.name === 'inviteinfo' ? 'nav-link-active opactity-100' : 'nav-link opacity-80 hover:opacity-100') +
+                    ' flex items-center font-medium text-base leading-snug text-white relative transition tracking-wide'
+                  "
+                  >Invite Info</span
+                >
+              </NuxtLink>
+            </div>
+            <div class="nav-item px-2 py-2 ml-2">
               <NuxtLink to="/status">
                 <span
                   v-bind:class="
@@ -215,8 +237,8 @@
             </div>
           </div>
           <div v-if="!loggedIn" class="nav-item ml-auto">
-            <a href="/login">
-              <div class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-xl text-white font-bold py-3 px-7 rounded-md transition duration-250">Log In</div>
+            <a :href="'/login?backUrl=/' + $nuxt.$route.name">
+              <div class="bg-discord-blurple transform hover:-translate-y-0.5 hover:shadow-xl text-white font-bold py-3 px-6 rounded-md transition duration-250">Log In</div>
             </a>
           </div>
           <div v-else class="nav-item relative inline-block ml-auto" ref="mobiledropdown">
