@@ -55,29 +55,29 @@
 </style>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   methods: {
     abbNum: (val) => {
-      let newValue = val
-      const suffixes = ['', 'k', 'm', 'b', 't']
-      let suffixNum = 0
+      let newValue = val;
+      const suffixes = ['', 'k', 'm', 'b', 't'];
+      let suffixNum = 0;
       while (newValue >= 1000) {
-        newValue /= 1000
-        suffixNum++
+        newValue /= 1000;
+        suffixNum++;
       }
 
-      newValue = newValue.toPrecision(3)
+      newValue = newValue.toPrecision(3);
 
-      newValue += suffixes[suffixNum]
-      return newValue
+      newValue += suffixes[suffixNum];
+      return newValue;
     },
     addCommas(x) {
-      x = x.toString()
-      let pattern = /(-?\d+)(\d{3})/
-      while (pattern.test(x)) x = x.replace(pattern, '$1,$2')
-      return x
+      x = x.toString();
+      let pattern = /(-?\d+)(\d{3})/;
+      while (pattern.test(x)) x = x.replace(pattern, '$1,$2');
+      return x;
     },
     sentanceCap(str) {
       return str
@@ -85,61 +85,61 @@ export default {
         .replace(/_/g, ' ')
         .split(' ')
         .map(function (word) {
-          return word[0].toUpperCase() + word.substr(1)
+          return word[0].toUpperCase() + word.substr(1);
         })
-        .join(' ')
+        .join(' ');
     },
     convertString(str) {
-      const strArr = str.split('')
-      let output = ''
+      const strArr = str.split('');
+      let output = '';
 
       strArr.forEach((c) => {
         if (!/[^a-zA-Z]/.test(c)) {
-          output += ':regional_indicator_' + c.toLowerCase() + ': '
+          output += ':regional_indicator_' + c.toLowerCase() + ': ';
         } else if (c == '0') {
-          output += ':zero: '
+          output += ':zero: ';
         } else if (c == '1') {
-          output += ':one: '
+          output += ':one: ';
         } else if (c == '2') {
-          output += ':two: '
+          output += ':two: ';
         } else if (c == '3') {
-          output += ':three: '
+          output += ':three: ';
         } else if (c == '4') {
-          output += ':four: '
+          output += ':four: ';
         } else if (c == '5') {
-          output += ':five: '
+          output += ':five: ';
         } else if (c == '6') {
-          output += ':six: '
+          output += ':six: ';
         } else if (c == '7') {
-          output += ':seven: '
+          output += ':seven: ';
         } else if (c == '8') {
-          output += ':eight: '
+          output += ':eight: ';
         } else if (c == '9') {
-          output += ':nine: '
+          output += ':nine: ';
         } else if (c == '#') {
-          output += ':hash: '
+          output += ':hash: ';
         } else if (c == '*') {
-          output += ':asterisk: '
+          output += ':asterisk: ';
         } else if (c == '>') {
-          output += ':arrow_forward: '
+          output += ':arrow_forward: ';
         } else if (c == '<') {
-          output += ':arrow_backward: '
+          output += ':arrow_backward: ';
         } else if (c == '!') {
-          output += ':exclamation: '
+          output += ':exclamation: ';
         } else if (c == '?') {
-          output += ':question: '
+          output += ':question: ';
         } else if (c == ' ') {
-          output += ' '
+          output += ' ';
         }
-      })
+      });
 
-      return output
+      return output;
     },
   },
   data() {
     return {
       text: '',
-    }
+    };
   },
-}
+};
 </script>

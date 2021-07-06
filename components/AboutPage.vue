@@ -76,29 +76,29 @@
 </style>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   methods: {
     abbNum: (val) => {
-      let newValue = val
-      const suffixes = ['', 'k', 'm', 'b', 't']
-      let suffixNum = 0
+      let newValue = val;
+      const suffixes = ['', 'k', 'm', 'b', 't'];
+      let suffixNum = 0;
       while (newValue >= 1000) {
-        newValue /= 1000
-        suffixNum++
+        newValue /= 1000;
+        suffixNum++;
       }
 
-      newValue = newValue.toPrecision(3)
+      newValue = newValue.toPrecision(3);
 
-      newValue += suffixes[suffixNum]
-      return newValue
+      newValue += suffixes[suffixNum];
+      return newValue;
     },
     addCommas(x) {
-      x = x.toString()
-      let pattern = /(-?\d+)(\d{3})/
-      while (pattern.test(x)) x = x.replace(pattern, '$1,$2')
-      return x
+      x = x.toString();
+      let pattern = /(-?\d+)(\d{3})/;
+      while (pattern.test(x)) x = x.replace(pattern, '$1,$2');
+      return x;
     },
   },
   data() {
@@ -113,7 +113,7 @@ export default {
           ['Techy', 'https://github.com/Techy'],
         ],
       },
-    }
+    };
   },
-}
+};
 </script>

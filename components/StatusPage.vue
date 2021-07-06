@@ -50,55 +50,55 @@
 </style>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   methods: {
     abbNum: (val) => {
-      let newValue = val
-      const suffixes = ['', 'k', 'm', 'b', 't']
-      let suffixNum = 0
+      let newValue = val;
+      const suffixes = ['', 'k', 'm', 'b', 't'];
+      let suffixNum = 0;
       while (newValue >= 1000) {
-        newValue /= 1000
-        suffixNum++
+        newValue /= 1000;
+        suffixNum++;
       }
 
-      newValue = newValue.toPrecision(3)
+      newValue = newValue.toPrecision(3);
 
-      newValue += suffixes[suffixNum]
-      return newValue
+      newValue += suffixes[suffixNum];
+      return newValue;
     },
     addCommas(x) {
-      x = x.toString()
-      let pattern = /(-?\d+)(\d{3})/
-      while (pattern.test(x)) x = x.replace(pattern, '$1,$2')
-      return x
+      x = x.toString();
+      let pattern = /(-?\d+)(\d{3})/;
+      while (pattern.test(x)) x = x.replace(pattern, '$1,$2');
+      return x;
     },
     async fetchStatus() {
       axios
         .get(process.env.baseUrl + '/api/discordstatus')
         .then((req) => {
-          let data = req.data
-          if (!data) return (this.fetchError = true)
+          let data = req.data;
+          if (!data) return (this.fetchError = true);
 
-          this.status = data
-          this.loading = false
-          this.fetchError = false
+          this.status = data;
+          this.loading = false;
+          this.fetchError = false;
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           if (process.client) {
-            console.log('FETCH ERROR')
-            if (err.response?.status === 401) return (document.location.href = '/login')
+            console.log('FETCH ERROR');
+            if (err.response?.status === 401) return (document.location.href = '/login');
             else {
-              this.loading = false
-              this.fetchError = true
+              this.loading = false;
+              this.fetchError = true;
             }
           }
-        })
+        });
     },
     toggleList() {
-      this.showList = !this.showList
+      this.showList = !this.showList;
     },
   },
   data() {
@@ -106,10 +106,10 @@ export default {
       status: [],
       loading: true,
       fetchError: false,
-    }
+    };
   },
   async created() {
-    if (process.client) this.fetchStatus()
+    if (process.client) this.fetchStatus();
   },
-}
+};
 </script>

@@ -11,5 +11,5 @@ export default {
   head: {
     title: 'DiscordTools | Discord Status',
   },
-}
+};
 </script>

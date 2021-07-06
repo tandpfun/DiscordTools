@@ -145,40 +145,40 @@
 </style>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   methods: {
     abbNum: (val) => {
-      let newValue = val
-      const suffixes = ['', 'k', 'm', 'b', 't']
-      let suffixNum = 0
+      let newValue = val;
+      const suffixes = ['', 'k', 'm', 'b', 't'];
+      let suffixNum = 0;
       while (newValue >= 1000) {
-        newValue /= 1000
-        suffixNum++
+        newValue /= 1000;
+        suffixNum++;
       }
 
-      newValue = newValue.toPrecision(3)
+      newValue = newValue.toPrecision(3);
 
-      newValue += suffixes[suffixNum]
-      return newValue
+      newValue += suffixes[suffixNum];
+      return newValue;
     },
     addCommas(x) {
-      x = x.toString()
-      let pattern = /(-?\d+)(\d{3})/
-      while (pattern.test(x)) x = x.replace(pattern, '$1,$2')
-      return x
+      x = x.toString();
+      let pattern = /(-?\d+)(\d{3})/;
+      while (pattern.test(x)) x = x.replace(pattern, '$1,$2');
+      return x;
     },
     validateInvite(invite) {
-      if (!invite) return false
-      if (invite.length < 2) return false
+      if (!invite) return false;
+      if (invite.length < 2) return false;
 
-      return true
+      return true;
     },
     inviteExpires(expires) {
-      const date = new Date(expires)
-      console.log(date.getTime())
-      return date
+      const date = new Date(expires);
+      console.log(date.getTime());
+      return date;
     },
     sentanceCap(str) {
       return str
@@ -186,9 +186,9 @@ export default {
         .replace(/_/g, ' ')
         .split(' ')
         .map(function (word) {
-          return word[0].toUpperCase() + word.substr(1)
+          return word[0].toUpperCase() + word.substr(1);
         })
-        .join(' ')
+        .join(' ');
     },
     parseURLParams(url) {
       var queryStart = url.indexOf('?') + 1,
@@ -199,65 +199,65 @@ export default {
         i,
         n,
         v,
-        nv
+        nv;
 
-      if (query === url || query === '') return
+      if (query === url || query === '') return;
 
       for (i = 0; i < pairs.length; i++) {
-        nv = pairs[i].split('=', 2)
-        n = decodeURIComponent(nv[0])
-        v = decodeURIComponent(nv[1])
+        nv = pairs[i].split('=', 2);
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
 
-        if (!parms.hasOwnProperty(n)) parms[n] = []
-        parms[n].push(nv.length === 2 ? v : null)
+        if (!parms.hasOwnProperty(n)) parms[n] = [];
+        parms[n].push(nv.length === 2 ? v : null);
       }
-      return parms
+      return parms;
     },
     fetchInvite() {
-      this.loading = true
+      this.loading = true;
 
-      let invite = this.invite
-      let inviteMatch = invite.match(/(?:https?:\/\/)?(?:\w+\.)?discord(?:(?:app)?\.com\/invite|\.gg)\/([A-Za-z0-9-]+)/)
+      let invite = this.invite;
+      let inviteMatch = invite.match(/(?:https?:\/\/)?(?:\w+\.)?discord(?:(?:app)?\.com\/invite|\.gg)\/([A-Za-z0-9-]+)/);
 
-      let inviteDecoded
+      let inviteDecoded;
       if (!inviteMatch?.[0]) {
-        inviteDecoded = invite
-      } else inviteDecoded = inviteMatch[1]
+        inviteDecoded = invite;
+      } else inviteDecoded = inviteMatch[1];
 
       if (!inviteDecoded) {
-        this.loading = false
-        this.fetchError.error = true
-        return (this.fetchError.type = 'invalid')
+        this.loading = false;
+        this.fetchError.error = true;
+        return (this.fetchError.type = 'invalid');
       }
 
       axios
         .get(`https://discord.com/api/v8/invites/${inviteDecoded}?with_counts=1&with_expiration=1`)
         .then((res) => {
-          let data = res.data
+          let data = res.data;
           if (!data) {
-            this.fetchError.error = true
-            this.loading = false
-            this.dataFetched = true
-            return
+            this.fetchError.error = true;
+            this.loading = false;
+            this.dataFetched = true;
+            return;
           }
 
-          this.data = data
-          this.loading = false
-          this.dataFetched = true
-          console.log(data)
+          this.data = data;
+          this.loading = false;
+          this.dataFetched = true;
+          console.log(data);
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           if (process.client) {
-            console.log('FETCH ERROR')
-            console.log(err.response.data.message)
-            if (err.response?.data?.message === 'Unknown Invite' || err.response?.status === 400) this.fetchError.type = 'invalid'
-            if (err.response?.status === 429) this.fetchError.type = 'ratelimit'
+            console.log('FETCH ERROR');
+            console.log(err.response.data.message);
+            if (err.response?.data?.message === 'Unknown Invite' || err.response?.status === 400) this.fetchError.type = 'invalid';
+            if (err.response?.status === 429) this.fetchError.type = 'ratelimit';
 
-            this.loading = false
-            this.fetchError.error = true
+            this.loading = false;
+            this.fetchError.error = true;
           }
-        })
+        });
     },
   },
   data() {
@@ -270,37 +270,37 @@ export default {
         type: '',
       },
       data: {},
-    }
+    };
   },
   watch: {
     invite: function (val, oldVal) {
-      this.loading = false
-      this.dataFetched = false
+      this.loading = false;
+      this.dataFetched = false;
       this.fetchError = {
         error: false,
         type: '',
-      }
-      this.data = {}
+      };
+      this.data = {};
 
-      if (val) window.history.replaceState(null, null, `?i=${this.invite}`)
+      if (val) window.history.replaceState(null, null, `?i=${this.invite}`);
       else {
-        const url = new URL(location)
-        url.searchParams.delete('i')
-        history.replaceState(null, null, url)
+        const url = new URL(location);
+        url.searchParams.delete('i');
+        history.replaceState(null, null, url);
       }
     },
   },
   async mounted() {
     this.$nextTick(() => {
       if (process.client) {
-        let urlParams = this.parseURLParams(location.href)
-        if (!urlParams) return
+        let urlParams = this.parseURLParams(location.href);
+        if (!urlParams) return;
         if (urlParams.i?.[0] && typeof urlParams.i?.[0] === 'string') {
-          this.invite = urlParams.i[0]
-          console.log(urlParams.i[0])
+          this.invite = urlParams.i[0];
+          console.log(urlParams.i[0]);
         }
       }
-    })
+    });
   },
-}
+};
 </script>

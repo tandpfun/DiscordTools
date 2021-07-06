@@ -1,25 +1,25 @@
 // API file
 
 // Import modules
-const app = require('express')()
+const app = require('express')();
 
 // Require routes
-const oauth = require('./routes/oauth')
-const status = require('./routes/status')
-const chalk = require('chalk')
+const oauth = require('./routes/oauth');
+const status = require('./routes/status');
+const chalk = require('chalk');
 
 // Import routes
-app.use(oauth)
-app.use(status)
+app.use(oauth);
+app.use(status);
 
 // Export express app
-module.exports = app
+module.exports = app;
 
 // Start standalone server if directly running
 if (require.main === module) {
-  const port = process.env.PORT || 3001
+  const port = process.env.PORT || 3001;
   app.listen(port, () => {
     // eslint-disable-next-line no-console
-    console.log(chalk`{greenBright.bold [API]} API online listening on port {magenta ${port}}`)
-  })
+    console.log(chalk`{greenBright.bold [API]} API online listening on port {magenta ${port}}`);
+  });
 }

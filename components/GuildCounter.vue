@@ -237,67 +237,67 @@
 </style>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   methods: {
     abbNum: (val) => {
-      let newValue = val
-      const suffixes = ['', 'k', 'm', 'b', 't']
-      let suffixNum = 0
+      let newValue = val;
+      const suffixes = ['', 'k', 'm', 'b', 't'];
+      let suffixNum = 0;
       while (newValue >= 1000) {
-        newValue /= 1000
-        suffixNum++
+        newValue /= 1000;
+        suffixNum++;
       }
 
-      newValue = newValue.toPrecision(3)
+      newValue = newValue.toPrecision(3);
 
-      newValue += suffixes[suffixNum]
-      return newValue
+      newValue += suffixes[suffixNum];
+      return newValue;
     },
     addCommas(x) {
-      x = x.toString()
-      let pattern = /(-?\d+)(\d{3})/
-      while (pattern.test(x)) x = x.replace(pattern, '$1,$2')
-      return x
+      x = x.toString();
+      let pattern = /(-?\d+)(\d{3})/;
+      while (pattern.test(x)) x = x.replace(pattern, '$1,$2');
+      return x;
     },
     showPopup(type) {
-      this.popup.visible = true
-      this.popup.type = type
+      this.popup.visible = true;
+      this.popup.type = type;
     },
     fetchStats() {
       axios
         .get(process.env.baseUrl + '/api/users/@me/guilds')
         .then((req) => {
-          let data = req.data
-          if (!data) return (this.fetchError = true)
+          let data = req.data;
+          if (!data) return (this.fetchError = true);
 
-          this.guilds.all = data
-          this.guilds.owned = data.filter((g) => g.owner)
-          this.guilds.mod = data.filter((g) => g.permissions & (1 << 13) && !g.owner)
-          this.guilds.community = data.filter((g) => g.features.includes('COMMUNITY'))
-          this.guilds.partnered = data.filter((g) => g.features.includes('PARTNERED'))
-          this.guilds.verified = data.filter((g) => g.features.includes('VERIFIED'))
-          this.guilds.discovery = data.filter((g) => g.features.includes('DISCOVERABLE'))
-          this.loading = false
-          this.fetchError = false
+          this.guilds.all = data;
+          this.guilds.owned = data.filter((g) => g.owner);
+          this.guilds.mod = data.filter((g) => g.permissions & (1 << 13) && !g.owner);
+          this.guilds.community = data.filter((g) => g.features.includes('COMMUNITY'));
+          this.guilds.partnered = data.filter((g) => g.features.includes('PARTNERED'));
+          this.guilds.verified = data.filter((g) => g.features.includes('VERIFIED'));
+          this.guilds.discovery = data.filter((g) => g.features.includes('DISCOVERABLE'));
+          this.loading = false;
+          this.fetchError = false;
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           if (process.client) {
-            console.log('FETCH ERROR')
+            console.log('FETCH ERROR');
             //if (err.response?.status === 401) return (document.location.href = '/login')
             //else {
-            this.loading = false
-            this.fetchError = true
-            this.errorCode = err.response?.status
-            console.log(this.errorCode)
+            this.loading = false;
+            this.fetchError = true;
+            this.errorCode = err.response?.status;
+            console.log(this.errorCode);
             //}
           }
-        })
+        });
     },
     toggleList() {
-      this.showList = !this.showList
+      this.showList = !this.showList;
     },
   },
   data() {
@@ -320,13 +320,13 @@ export default {
         title: '',
         type: '',
       },
-    }
+    };
   },
   async mounted() {
-    if (process.server) return
+    if (process.server) return;
     this.$nextTick(() => {
-      if (process.client) this.fetchStats()
-    })
+      if (process.client) this.fetchStats();
+    });
   },
-}
+};
 </script>

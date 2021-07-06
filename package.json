@@ -35,7 +35,7 @@
     "memorystore": "^1.6.5",
     "mongoose": "^5.11.19",
     "npm": "^7.6.0",
-    "nuxt": "^2.15.4",
+    "nuxt": "^2.15.7",
     "nuxt-tailvue": "^1.0.68",
     "passport": "^0.4.1",
     "passport-discord": "^0.1.4",

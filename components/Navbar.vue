@@ -364,7 +364,7 @@
 </style>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 export default {
   name: 'navbar',
   data() {
@@ -374,22 +374,22 @@ export default {
       showMobileDropdown: false,
       loggedIn: false,
       user: {},
-    }
+    };
   },
   methods: {
     toggleNavbar: function () {
-      this.showMenu = !this.showMenu
+      this.showMenu = !this.showMenu;
     },
     toggleDropdown: function () {
-      this.showDropdown = !this.showDropdown
+      this.showDropdown = !this.showDropdown;
     },
     toggleMobileDropdown: function () {
-      this.showMobileDropdown = !this.showMobileDropdown
+      this.showMobileDropdown = !this.showMobileDropdown;
     },
     closeDropdown: function (e) {
       if (this.$refs.dropdown) {
         if (!this.$refs.dropdown.contains(e.target)) {
-          this.showDropdown = false
+          this.showDropdown = false;
         }
       }
     },
@@ -397,22 +397,22 @@ export default {
       await axios
         .get(process.env.baseUrl + '/api/users/@me')
         .then((req) => {
-          this.user = req.data
-          this.loggedIn = true
+          this.user = req.data;
+          this.loggedIn = true;
         })
-        .catch((h) => h)
+        .catch((h) => h);
     },
   },
   async mounted() {
     if (process.client) {
       this.$nextTick(async () => {
-        await this.fetchUser()
-        document.addEventListener('click', this.closeDropdown)
-      })
+        await this.fetchUser();
+        document.addEventListener('click', this.closeDropdown);
+      });
     }
   },
   beforeDestroy() {
-    document.removeEventListener('click', this.closeDropdown)
+    document.removeEventListener('click', this.closeDropdown);
   },
-}
+};
 </script>

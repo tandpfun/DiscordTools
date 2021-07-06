@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -42,7 +42,7 @@ export default {
   },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'https://discordtools.io',
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -87,10 +87,9 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
-  watchers: {
-    webpack: {
-      aggregateTimeout: 300,
-      poll: 1000,
+  pwa: {
+    manifest: {
+      lang: 'en',
     },
   },
-}
+};

@@ -175,47 +175,47 @@
 </style>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   methods: {
     abbNum: (val) => {
-      let newValue = val
-      const suffixes = ['', 'k', 'm', 'b', 't']
-      let suffixNum = 0
+      let newValue = val;
+      const suffixes = ['', 'k', 'm', 'b', 't'];
+      let suffixNum = 0;
       while (newValue >= 1000) {
-        newValue /= 1000
-        suffixNum++
+        newValue /= 1000;
+        suffixNum++;
       }
 
-      newValue = newValue.toPrecision(3)
+      newValue = newValue.toPrecision(3);
 
-      newValue += suffixes[suffixNum]
-      return newValue
+      newValue += suffixes[suffixNum];
+      return newValue;
     },
     addCommas(x) {
-      x = x.toString()
-      let pattern = /(-?\d+)(\d{3})/
-      while (pattern.test(x)) x = x.replace(pattern, '$1,$2')
-      return x
+      x = x.toString();
+      let pattern = /(-?\d+)(\d{3})/;
+      while (pattern.test(x)) x = x.replace(pattern, '$1,$2');
+      return x;
     },
     validateSnowflake(snowflake) {
-      const epoch = 1420070400000
+      const epoch = 1420070400000;
 
-      if (!snowflake) return false
-      if (isNaN(snowflake)) return false
-      if (snowflake < 4194304) return false
+      if (!snowflake) return false;
+      if (isNaN(snowflake)) return false;
+      if (snowflake < 4194304) return false;
 
-      const timestamp = new Date(snowflake / 4194304 + epoch)
-      if (isNaN(timestamp.getTime())) return false
+      const timestamp = new Date(snowflake / 4194304 + epoch);
+      if (isNaN(timestamp.getTime())) return false;
 
-      return true
+      return true;
     },
     fetchTimestamp(snowflake) {
-      const epoch = 1420070400000
-      const timestamp = new Date(snowflake / 4194304 + epoch)
-      if (isNaN(timestamp.getTime())) return 0
-      else return timestamp
+      const epoch = 1420070400000;
+      const timestamp = new Date(snowflake / 4194304 + epoch);
+      if (isNaN(timestamp.getTime())) return 0;
+      else return timestamp;
     },
     parseURLParams(url) {
       var queryStart = url.indexOf('?') + 1,
@@ -226,51 +226,51 @@ export default {
         i,
         n,
         v,
-        nv
+        nv;
 
-      if (query === url || query === '') return
+      if (query === url || query === '') return;
 
       for (i = 0; i < pairs.length; i++) {
-        nv = pairs[i].split('=', 2)
-        n = decodeURIComponent(nv[0])
-        v = decodeURIComponent(nv[1])
+        nv = pairs[i].split('=', 2);
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
 
-        if (!parms.hasOwnProperty(n)) parms[n] = []
-        parms[n].push(nv.length === 2 ? v : null)
+        if (!parms.hasOwnProperty(n)) parms[n] = [];
+        parms[n].push(nv.length === 2 ? v : null);
       }
-      return parms
+      return parms;
     },
     fetchFromDiscord() {
-      this.loading = true
+      this.loading = true;
 
       axios
         .get(`/api/fetch/snowflake/${this.snowflake}`)
         .then((res) => {
-          let data = res.data
+          let data = res.data;
           if (!data) {
-            this.fetchError.error = true
-            this.loading = false
-            this.dataFetched = true
-            return
+            this.fetchError.error = true;
+            this.loading = false;
+            this.dataFetched = true;
+            return;
           }
 
-          this.data = data
-          this.loading = false
-          this.dataFetched = true
-          console.log(data)
+          this.data = data;
+          this.loading = false;
+          this.dataFetched = true;
+          console.log(data);
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           if (process.client) {
-            console.log('FETCH ERROR')
-            if (err.response?.status === 401) this.fetchError.type = 'login'
-            if (err.response?.status === 400) this.fetchError.type = 'invalid'
-            if (err.response?.status === 429) this.fetchError.type = 'ratelimit'
+            console.log('FETCH ERROR');
+            if (err.response?.status === 401) this.fetchError.type = 'login';
+            if (err.response?.status === 400) this.fetchError.type = 'invalid';
+            if (err.response?.status === 429) this.fetchError.type = 'ratelimit';
 
-            this.loading = false
-            this.fetchError.error = true
+            this.loading = false;
+            this.fetchError.error = true;
           }
-        })
+        });
     },
   },
   data() {
@@ -283,33 +283,33 @@ export default {
         type: '',
       },
       data: {},
-    }
+    };
   },
   watch: {
     snowflake: function (val, oldVal) {
-      this.loading = false
-      this.dataFetched = false
+      this.loading = false;
+      this.dataFetched = false;
       this.fetchError = {
         error: false,
         type: '',
-      }
-      this.data = {}
+      };
+      this.data = {};
 
-      if (val) window.history.replaceState(null, null, `?s=${this.snowflake}`)
+      if (val) window.history.replaceState(null, null, `?s=${this.snowflake}`);
       else {
-        const url = new URL(location)
-        url.searchParams.delete('s')
-        history.replaceState(null, null, url)
+        const url = new URL(location);
+        url.searchParams.delete('s');
+        history.replaceState(null, null, url);
       }
     },
   },
   async mounted() {
     if (process.client) {
-      let urlParams = this.parseURLParams(location.href)
-      if (!urlParams) return
+      let urlParams = this.parseURLParams(location.href);
+      if (!urlParams) return;
       if (urlParams.s?.[0] && typeof urlParams.s?.[0] === 'string') {
-        this.snowflake = urlParams.s[0]
-        console.log(urlParams.s[0])
+        this.snowflake = urlParams.s[0];
+        console.log(urlParams.s[0]);
       }
     }
   },
@@ -331,7 +331,7 @@ export default {
             : 'Get info on a discord snowflake!',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
