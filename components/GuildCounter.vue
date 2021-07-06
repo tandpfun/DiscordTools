@@ -1,5 +1,5 @@
 <template>
-  <div class="sm:pt-8 lg:pt-10 sm:pb-12 md:pb-16 lg:pb-24 xl:pb-40 bg-dark-darker mt-5 mb-5">
+  <div class="sm:pt-8 lg:pt-10 sm:pb-12 bg-dark-darker mt-5 mb-5">
     <div class="align-center mx-5 text-center">
       <div class="sm:my-auto max-w-2xl mx-auto my-10">
         <h1 class="md:text-5xl mb-2 text-3xl font-bold text-gray-900">
@@ -13,6 +13,21 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
+        </div>
+        <div v-else-if="fetchError && errorCode == 401" class="text-gray-100 text-center">
+          <div class="text-4xl text-discord-blurple font-bold">Log In</div>
+          <div class="text-lg mt-2 max-w-4xl mx-auto">
+            In order to get a count of your servers, you need to log in with Discord. DiscordTools never stores or logs any of your data. This website is open source on
+            <a class="text-blue-500 hover:text-blue-600 transition duration-250" href="https://github.com/tandpfun/DiscordTools" target="_blank">Github</a>.
+          </div>
+          <div class="sm:flex justify-center mt-2 text-center">
+            <a
+              class="cursor-pointer transform hover:-translate-y-0.5 hover:shadow-md text-white font-bold py-2 px-5 rounded-md transition duration-250 bg-discord-blurple"
+              href="/login?backUrl=/guildcount"
+            >
+              Log in with Discord
+            </a>
+          </div>
         </div>
         <div class="text-3xl font-bold text-center text-gray-400" v-else-if="fetchError">
           <font-awesome-icon :icon="['fas', 'exclamation-triangle']" /> {{ errorCode == 429 ? "You're Being Ratelimited" : 'Error Fetching Guilds' }}
@@ -111,7 +126,7 @@
                     class="inline rounded-full float-left mt-1"
                     style="width: 32px; height: 32px"
                   />
-                  <span class="ml-2">{{ guild.name }}</span>
+                  <span class="ml-2 overflow-hidden">{{ guild.name }}</span>
                   <img v-if="guild.owner" src="~/assets/img/owner.png" class="inline w-4 h-4 ml-1" />
                   <img v-if="guild.permissions & (1 << 13) && !guild.owner" src="~/assets/img/moderator.svg" class="inline w-4 h-4 ml-1" />
                   <img v-if="guild.features.includes('PARTNERED')" src="~/assets/img/partner.png" class="inline w-4 h-4 ml-1" />
@@ -271,13 +286,13 @@ export default {
           console.log(err)
           if (process.client) {
             console.log('FETCH ERROR')
-            if (err.response?.status === 401) return (document.location.href = '/login')
-            else {
-              this.loading = false
-              this.fetchError = true
-              this.errorCode = err.response?.status
-              console.log(this.errorCode)
-            }
+            //if (err.response?.status === 401) return (document.location.href = '/login')
+            //else {
+            this.loading = false
+            this.fetchError = true
+            this.errorCode = err.response?.status
+            console.log(this.errorCode)
+            //}
           }
         })
     },
