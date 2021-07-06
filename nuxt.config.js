@@ -82,17 +82,10 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    'vue-scrollto/nuxt',
-    ['nuxt-tailvue', { toast: true }],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    vendor: ['~/assets/js/outline.js'],
-  },
 
   watchers: {
     webpack: {
