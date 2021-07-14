@@ -24,6 +24,7 @@ setInterval(async () => {
     else {
       status.discord.ping = 0;
       status.discord.online = false;
+      console.log('discord req');
     }
   }
 
@@ -41,7 +42,7 @@ setInterval(async () => {
 
   let statusPage = await axios.get('https://discordstatus.com/api/v2/status.json').catch((err) => null);
   if (statusPage?.data) {
-    const offlineStatuses = ['minor', 'major', 'critial'];
+    const offlineStatuses = ['minor', 'major', 'critical'];
     if (offlineStatuses.includes(statusPage.data.status.indicator)) status.discord.online = false;
   }
 
