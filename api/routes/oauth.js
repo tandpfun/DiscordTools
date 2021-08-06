@@ -87,6 +87,8 @@ router.get(
     } else {
       req.session.backUrl = '/';
     }
+
+    if (req.session.backUrl === '/index') req.session.backUrl = '/';
     // Forward the request to the passport middleware.
     next();
   },

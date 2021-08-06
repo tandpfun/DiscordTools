@@ -69,15 +69,6 @@ export default {
     },
   },
 
-  // Google Fonts
-  /*
-  googleFonts: {
-    families: {
-      Rubik: [100,200,300,400,500,600,700,800,900,1000],
-      Poppins: [100,200,300,400,500,600,700,800,900,1000],
-    }
-  },*/
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -86,10 +77,4 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
-
-  pwa: {
-    manifest: {
-      lang: 'en',
-    },
-  },
 };

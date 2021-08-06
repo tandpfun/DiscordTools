@@ -1,9 +1,7 @@
 <template>
   <div class="main">
     <Navbar />
-    <div class="content">
-      <Nuxt />
-    </div>
+    <Nuxt />
     <client-only>
       <script async defer src="https://sa.discordtools.io/latest.js"></script>
       <noscript><img src="https://sa.discordtools.io/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
@@ -34,9 +32,5 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-}
-
-.content {
-  flex: 1;
 }
 </style>

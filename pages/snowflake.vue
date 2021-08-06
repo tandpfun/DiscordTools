@@ -58,18 +58,25 @@
                       ></path>
                     </svg>
                   </div>
-                  <div class="text-3xl text-center text-white mt-2 max-w-xl mx-auto" v-else-if="dataFetched">
+                  <div class="mt-2 p-5 max-w-lg mx-auto bg-dark-darker rounded-md text-white" v-else-if="dataFetched">
                     <template v-if="data.type == 'user'">
-                      <img
-                        :src="data.avatar ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '?size=256' : 'https://cdn.discordapp.com/embed/avatars/0.png'"
-                        class="rounded-full m-1 mx-auto"
-                        style="width: 75px; height: 75px"
-                      />
-                      <p class="text-xl text-gray-200 text-center"><b>Type:</b> {{ data.bot ? 'Bot' : 'User' }}</p>
-                      <p class="text-xl text-gray-200 text-center"><b>Username:</b> {{ data.username }}#{{ data.discriminator }}</p>
-                      <!-- <p class="text-xl text-gray-200 text-center"><b>Badges:</b> Coming Soon</p> -->
-                      <p class="text-xl text-gray-200 text-center"><b>Created:</b> {{ fetchTimestamp(snowflake).toLocaleString() }}</p>
-                      <p class="text-xl text-gray-200 text-center"><b>Bot:</b> {{ data.bot || 'false' }}</p>
+                      <div class="flex flex-row items-center justify-center">
+                        <img
+                          :src="data.avatar ? 'https://cdn.discordapp.com/avatars/' + data.id + '/' + data.avatar + '?size=256' : 'https://cdn.discordapp.com/embed/avatars/0.png'"
+                          class="rounded-full m-1"
+                          style="width: 75px; height: 75px"
+                        />
+                        <div class="text-white text-left ml-4 my-2 flex flex-col">
+                          <p class="text-xl font-semibold text-gray-200">
+                            {{ data.username }}#{{ data.discriminator }}
+                            <span v-if="data.bot" class="text-sm px-2 py-1 bg-discord-blurple rounded-md">BOT</span>
+                          </p>
+                          <p class="text-md text-gray-400">{{ data.id }}</p>
+                        </div>
+                      </div>
+                      <div class="text-center w-4/6 mx-auto mt-3 pt-3 border-t border-gray-500">
+                        <p class="text-md text-gray-200 text-center"><b>Created:</b> {{ fetchTimestamp(snowflake).toLocaleString() }}</p>
+                      </div>
                     </template>
                     <template v-else-if="data.type == 'guild'">
                       <img
@@ -82,13 +89,13 @@
                         class="rounded-full m-1 mx-auto"
                         style="width: 75px; height: 75px"
                       />
-                      <p class="text-xl text-gray-200 text-center"><b>Type:</b> Server</p>
+                      <p class="text-md text-gray-200 text-center"><b>Type:</b> Server</p>
                       <div v-if="data.disabled">
-                        <p class="text-xl text-gray-200 text-center">Widget is Disabled</p>
+                        <p class="text-md text-gray-200 text-center">Widget is Disabled</p>
                       </div>
                       <div v-else class="text-center">
-                        <p class="text-xl text-gray-200 text-center"><b>Name:</b> {{ data.guild.name }}</p>
-                        <p class="text-xl text-gray-200 text-center">
+                        <p class="text-md text-gray-200 text-center"><b>Name:</b> {{ data.guild.name }}</p>
+                        <p class="text-md text-gray-200 text-center">
                           <b>Members:</b>
                           {{
                             data.guild.approximate_member_count
@@ -96,10 +103,10 @@
                               : null || (data.guild.members.length == 100 ? 'More than 100' : data.guild.members.length) || 'Unknown'
                           }}
                         </p>
-                        <p class="text-xl text-gray-200 text-center" v-if="data.guild.emojis ? data.guild.emojis.length : null"><b>Emojis:</b> {{ data.guild.emojis.length }}</p>
-                        <p class="text-xl text-gray-200 text-center" v-if="data.guild.description"><b>Description:</b> {{ data.guild.description }}</p>
-                        <p class="text-xl text-gray-200 text-center" v-if="data.guild.instant_invite">
-                          <b>Invite:</b> <a class="text-blue-400" :href="data.guild.instant_invite">Click Here</a>
+                        <p class="text-md text-gray-200 text-center" v-if="data.guild.emojis ? data.guild.emojis.length : null"><b>Emojis:</b> {{ data.guild.emojis.length }}</p>
+                        <p class="text-md text-gray-200 text-center" v-if="data.guild.description"><b>Description:</b> {{ data.guild.description }}</p>
+                        <p class="text-md text-gray-200 text-center" v-if="data.guild.instant_invite">
+                          <b>Invite:</b> <a class="text-blue-400" :href="data.guild.instant_invite">{{ data.guild.instant_invite }}</a>
                         </p>
                       </div>
                     </template>

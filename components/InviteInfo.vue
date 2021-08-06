@@ -52,36 +52,36 @@
                       ></path>
                     </svg>
                   </div>
-                  <div class="text-3xl text-center text-white mt-2 max-w-xl mx-auto" v-else-if="dataFetched">
-                    <img
-                      v-if="data.guild.icon"
-                      :src="
-                        data.guild.icon
-                          ? 'https://cdn.discordapp.com/icons/' + data.guild.id + '/' + data.guild.icon + '?size=256'
-                          : 'https://cdn.discordapp.com/embed/avatars/0.png'
-                      "
-                      class="rounded-full m-1 mx-auto"
-                      style="width: 75px; height: 75px"
-                    />
-                    <div class="text-center">
-                      <p class="text-xl text-gray-200 text-center"><b>Name:</b> {{ data.guild.name }}</p>
-                      <p class="text-xl text-gray-200 text-center" v-if="data.guild.description"><b>Description:</b> {{ data.guild.description }}</p>
-                      <p class="text-xl text-gray-200 text-center" v-if="data.approximate_member_count"><b>Member Count:</b> {{ addCommas(data.approximate_member_count) }}</p>
-                      <p class="text-xl text-gray-200 text-center" v-if="data.expires_at">
-                        <b>Invite Expires:</b> {{ inviteExpires(data.expires_at).toLocaleString() }} [{{ (new Date().toString().split('(')[1] || '').slice(0, -1) }}]
-                      </p>
-                      <div class="text-xl text-gray-200 text-center" v-if="data.guild.features[0]">
-                        <b>Features:</b>
-                        <div class="flex">
-                          <ul class="list-disc text-sm tracking-tight text-left flex flex-col flex-shrink mx-auto py-2 px-4 mb-1 bg-dark-darker rounded-md list-inside">
-                            <li v-for="feature in data.guild.features" :key="feature">
-                              {{ sentanceCap(feature) }}
-                            </li>
-                          </ul>
-                        </div>
+                  <div class="mt-2 p-5 max-w-xl mx-auto bg-dark-darker rounded-md text-white" v-else-if="dataFetched">
+                    <div class="flex flex-row items-center justify-center">
+                      <img
+                        v-if="data.guild.icon"
+                        :src="
+                          data.guild.icon
+                            ? 'https://cdn.discordapp.com/icons/' + data.guild.id + '/' + data.guild.icon + '?size=256'
+                            : 'https://cdn.discordapp.com/embed/avatars/0.png'
+                        "
+                        class="rounded-full m-1"
+                        style="width: 75px; height: 75px"
+                      />
+                      <div class="text-white text-left ml-4 my-2 flex flex-col">
+                        <p class="text-xl font-semibold text-gray-200">{{ data.guild.name }}</p>
+                        <p class="text-md text-gray-200">{{ addCommas(data.approximate_presence_count) }} Online - {{ addCommas(data.approximate_member_count) }} Members</p>
                       </div>
-                      <p class="text-xl text-gray-200 text-center" v-if="data.code">
-                        <b>Invite:</b> <a class="text-blue-400" :href="'https://discord.gg/' + data.code">Click Here</a>
+                    </div>
+                    <div class="text-center w-5/6 mx-auto mt-2 pt-2 border-t border-gray-500">
+                      <p class="text-lg text-gray-200 text-center" v-if="data.guild.description">{{ data.guild.description }}</p>
+                    </div>
+                    <div class="text-center w-5/6 mx-auto mt-2 pt-2 border-t border-gray-500" v-if="data.guild.features[0]">
+                      <b>Features:</b>
+                      <p>
+                        {{ data.guild.features.map((f) => sentanceCap(f)).join(', ') }}
+                      </p>
+                    </div>
+                    <div class="text-center w-5/6 mx-auto mt-2 pt-2 border-t border-gray-500">
+                      <p class="text-lg text-gray-200 text-center" v-if="data.expires_at"><b>Invite Expires:</b> {{ inviteExpires(data.expires_at).toLocaleString() }}</p>
+                      <p class="text-lg text-gray-200 text-center" v-if="data.code">
+                        <b>Invite:</b> <a class="text-blue-400" :href="'https://discord.gg/' + data.code">{{ 'https://discord.gg/' + data.code }}</a>
                       </p>
                     </div>
                   </div>
