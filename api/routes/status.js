@@ -44,6 +44,7 @@ setInterval(async () => {
   if (statusPage?.data) {
     const offlineStatuses = ['minor', 'major', 'critical'];
     if (offlineStatuses.includes(statusPage.data.status.indicator)) status.discord.online = false;
+    else status.discord.online = true;
   }
 
   if (discordStagingRedir?.request?.host.includes('cloudflareaccess')) status.staging.open = false;
