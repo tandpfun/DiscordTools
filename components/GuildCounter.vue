@@ -18,7 +18,7 @@
           <div class="text-4xl text-discord-blurple font-bold">Log In</div>
           <div class="text-lg mt-2 max-w-4xl mx-auto">
             To get a count of your servers, you need to log in with Discord. DiscordTools never stores or logs any of your data. This website is open source on
-            <a class="text-blue-500 hover:text-blue-600 transition duration-250" href="https://github.com/tandpfun/DiscordTools" target="_blank">Github</a>.
+            <a class="text-blue-500 hover:text-blue-600 transition duration-250" href="https://github.com/tandpfun/DiscordTools" target="_blank">GitHub</a>.
           </div>
           <div class="sm:flex justify-center mt-2 text-center">
             <a
