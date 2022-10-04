@@ -21,7 +21,7 @@
         <ul class="list-disc ml-10 mb-5">
           <li>
             <font-awesome-icon :icon="['fab', 'github']" />
-            <a class="text-blue-500 hover:text-blue-600 transition duration-250" href="https://github.com/tandpfun/DiscordTools" target="_blank"> Github</a>
+            <a class="text-blue-500 hover:text-blue-600 transition duration-250" href="https://github.com/tandpfun/DiscordTools" target="_blank"> GitHub</a>
           </li>
           <li>
             <font-awesome-icon :icon="['fab', 'discord']" />
