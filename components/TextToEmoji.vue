@@ -141,10 +141,27 @@ export default {
         }
         else if (c == 'ï' || c == 'î' || c == 'ì') {
           output += ':regional_indicator_i:';
-        } else if (c == 'à' || c == 'ä' ) {
+        } 
+        else if (c == 'à' || c == 'ä' ) {
           output += ':regional_indicator_a:'
-        } else if (c == 'ñ') return {
+        } 
+        else if (c == 'ñ') {
           output +=':regional_indicator_n:'
+        } 
+        else if (c == '=') {
+          output += ':heavy_equals_sign:';
+        } 
+        else if (c == '+') {
+          output += ':heavy_plus_sign:';
+        } 
+        else if (c == '-') {
+          output += ':heavy_minus_sign:';
+        } 
+        else if (c == '$') {
+          output += ':heavy_dollar_sign:';
+        } 
+        else if (c == '+') {
+          output += ':heavy_plus_sign:';
         }
       });
 
