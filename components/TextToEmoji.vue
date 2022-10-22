@@ -162,6 +162,9 @@ export default {
         } 
         else if (c == '+') {
           output += ':heavy_plus_sign:';
+        } 
+        else {
+          output += c;
         }
       });
 
