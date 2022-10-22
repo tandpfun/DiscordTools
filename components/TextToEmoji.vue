@@ -130,6 +130,21 @@ export default {
           output += ':question: ';
         } else if (c == ' ') {
           output += ' ';
+        } else if (c == 'à') {
+          output += ':regional_indicator_a:';
+        }
+        else if (c == 'ç') {
+          output += ':regional_indicator_c:';
+        }
+        else if (c == 'é' || c == 'è' || c == 'ë') {
+          output += ':regional_indicator_e:';
+        }
+        else if (c == 'ï' || c == 'î' || c == 'ì') {
+          output += ':regional_indicator_i:';
+        } else if (c == 'à' || c == 'ä' ) {
+          output += ':regional_indicator_a:'
+        } else if (c == 'ñ') return {
+          output +=':regional_indicator_n:'
         }
       });
 
