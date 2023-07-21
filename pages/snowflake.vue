@@ -68,7 +68,7 @@
                         />
                         <div class="text-white text-left ml-4 my-2 flex flex-col">
                           <p class="text-xl font-semibold text-gray-200">
-                            {{ data.username }}#{{ data.discriminator }}
+                            {{ data.username }}
                             <span v-if="data.bot" class="text-sm px-2 py-1 bg-discord-blurple rounded-md">BOT</span>
                           </p>
                           <p class="text-md text-gray-400">{{ data.id }}</p>

@@ -231,7 +231,7 @@ export default {
       }
 
       axios
-        .get(`https://discord.com/api/v8/invites/${inviteDecoded}?with_counts=1&with_expiration=1`)
+        .get(`https://discord.com/api/v9/invites/${inviteDecoded}?with_counts=1&with_expiration=1`)
         .then((res) => {
           let data = res.data;
           if (!data) {

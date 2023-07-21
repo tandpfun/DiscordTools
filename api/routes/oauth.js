@@ -51,7 +51,7 @@ router.use(
 let ratelimitHandler = function (req, res /*next*/) {
   res.status(429).send('Too many requests, please try again later.');
   if (req.isAuthenticated()) {
-    console.warn(`${req.user.username}#${req.user.discriminator} (${req.user.id}) is being ratelimited at ${req.originalUrl}.`);
+    console.warn(`${req.user.username} (${req.user.id}) is being ratelimited at ${req.originalUrl}.`);
   }
 };
 
@@ -131,7 +131,7 @@ async function getGuild(id) {
   let data;
 
   await axios
-    .get(`https://discord.com/api/v8/guilds/${id}/widget.json`)
+    .get(`https://discord.com/api/v9/guilds/${id}/widget.json`)
     .then((res) => {
       if (res.data?.id)
         data = {
@@ -150,7 +150,7 @@ async function getGuild(id) {
 
   if (data) {
     let request = await axios
-      .get(`https://discord.com/api/v8/guilds/${id}/preview`, {
+      .get(`https://discord.com/api/v9/guilds/${id}/preview`, {
         headers: {
           Authorization: `Bot ${process.env.TOKEN}`,
         },
@@ -166,7 +166,7 @@ async function getGuild(id) {
 
 async function fetchUser(id) {
   let request = await axios
-    .get('https://discord.com/api/v8/users/' + id, {
+    .get('https://discord.com/api/v9/users/' + id, {
       headers: {
         Authorization: `Bot ${process.env.TOKEN}`,
       },
@@ -205,7 +205,7 @@ router.get('/api/users/@me/guilds', async (req, res) => {
         Authorization: `Bearer ${req.user.accessToken}`,
       },
     })
-    .catch((err) => console.error(`Error fetching ${req.user?.username}#${req.user?.discriminator}'s guilds: ${err.response?.status}`));
+    .catch((err) => console.error(`Error fetching ${req.user?.username}'s guilds: ${err.response?.status}`));
 
   if (!reqGuilds) return res.sendStatus(429);
 

@@ -18,7 +18,7 @@ const status = {
 
 setInterval(async () => {
   let startTime = Date.now();
-  let discordApiReq = await axios.get('https://discord.com/api/v8/users/@me').catch((err) => err.response?.status);
+  let discordApiReq = await axios.get('https://discord.com/api/v9/users/@me').catch((err) => err.response?.status);
   if (discordApiReq) {
     if (!isNaN(discordApiReq)) status.discord.ping = -(startTime - Date.now());
     else {
