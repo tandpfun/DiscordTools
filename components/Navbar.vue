@@ -117,7 +117,7 @@
         </div>
         <div v-else class="nav-item relative inline-block ml-auto" ref="dropdown">
           <a class="hover:opacity-80 px-7 duration-250 font-semibold text-white transition transform rounded opacity-100 cursor-pointer" @click="toggleDropdown">
-            {{ user.username }}#{{ user.discriminator }}
+            {{ user.username }}
             <font-awesome-icon class="ml-1" :icon="['fas', 'chevron-down']" />
           </a>
           <transition name="menu-fade">
@@ -243,7 +243,7 @@
           </div>
           <div v-else class="nav-item relative inline-block ml-auto" ref="mobiledropdown">
             <a class="opacity-80 px-7 duration-250 font-semibold text-white transition transform rounded cursor-pointer" @click="toggleMobileDropdown">
-              {{ user.username }}#{{ user.discriminator }}
+              {{ user.username }}
               <font-awesome-icon class="ml-1" :icon="['fas', 'chevron-down']" />
             </a>
             <transition name="menu-fade">
