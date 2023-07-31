@@ -130,6 +130,41 @@ export default {
           output += ':question: ';
         } else if (c == ' ') {
           output += ' ';
+        } else if (c == 'à') {
+          output += ':regional_indicator_a:';
+        }
+        else if (c == 'ç') {
+          output += ':regional_indicator_c:';
+        }
+        else if (c == 'é' || c == 'è' || c == 'ë') {
+          output += ':regional_indicator_e:';
+        }
+        else if (c == 'ï' || c == 'î' || c == 'ì') {
+          output += ':regional_indicator_i:';
+        } 
+        else if (c == 'à' || c == 'ä' ) {
+          output += ':regional_indicator_a:'
+        } 
+        else if (c == 'ñ') {
+          output +=':regional_indicator_n:'
+        } 
+        else if (c == '=') {
+          output += ':heavy_equals_sign:';
+        } 
+        else if (c == '+') {
+          output += ':heavy_plus_sign:';
+        } 
+        else if (c == '-') {
+          output += ':heavy_minus_sign:';
+        } 
+        else if (c == '$') {
+          output += ':heavy_dollar_sign:';
+        } 
+        else if (c == '+') {
+          output += ':heavy_plus_sign:';
+        } 
+        else {
+          output += c;
         }
       });
 
